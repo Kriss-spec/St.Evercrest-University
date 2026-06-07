@@ -180,7 +180,6 @@ body {
     /* 3. ปรับให้ Showcase Container จัดการกึ่งกลางแนวตั้งให้เอง */
     .showcase-container {
         display: flex;
-        align-items: center;
         overflow-x: auto;
         scroll-snap-type: x mandatory !important;
         -webkit-overflow-scrolling: touch;
@@ -191,14 +190,18 @@ body {
     }
 
     .card-wrapper {
-        flex: 0 0 100vw !important; /* บังคับให้แต่ละใบกว้างเต็ม 100% ของจอ */
+        flex: 0 0 100vw !important;
         scroll-snap-align: center !important;
         display: flex;
-        justify-content: center; /* ดันการ์ดให้อยู่กลางแนวนอน */
-        align-items: center;     /* ดันการ์ดให้อยู่กลางแนวตั้ง */
-        margin: 0 !important;    /* ลบ margin ทิ้งให้หมด */
-        filter: blur(0px) brightness(1) !important;
-        transform: scale(1) !important;
+        justify-content: center;
+        align-items: center;
+        margin: 0 !important;
+        
+        /* นำเอฟเฟกต์เบลอและความย่อ/ขยายกลับมา */
+        transition: all 0.5s ease;
+        filter: blur(6px) brightness(0.4); /* เบลอและมืดลงเมื่อไม่ได้โฟกัส */
+        transform: scale(0.85);             /* ย่อขนาดใบที่ไม่โฟกัส */
+        z-index: 1;
     }
 
     /* ปรับสูตรดันใบแรกและใบสุดท้ายให้สัมพันธ์กับ 250px */
@@ -210,12 +213,12 @@ body {
     }
 
     .card-wrapper.active {
-        filter: blur(0px) brightness(1);
-        transform: scale(1.05);
+        filter: blur(0px) brightness(1) !important;
+        transform: scale(1) !important;
         z-index: 10;
     }
     .card {
-        width: 250px !important; /* ขนาดการ์ดที่คุณชอบ */
+        width: 250px !important;
         height: 357px !important;
         margin: 0;
     }
