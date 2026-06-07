@@ -154,49 +154,29 @@ body {
    รองรับหน้าจอมือถือ (ปรับกึ่งกลางแบบเป๊ะๆ)
 ========================================= */
 @media screen and (max-width: 768px) {
-    /* 1. จัดหัวข้อให้กระชับขึ้น */
-    .showcase-title {
-        top: 2%;
-        font-size: 1.1rem;
-        letter-spacing: 4px;
-        width: 100%;
-        text-align: center;
-    }
-
-    /* 2. หมวดหมู่ย้ายลงมานิดเดียว */
-    .category-filters {
-        top: 10%;
-        width: 98vw;
-        flex-wrap: nowrap;
-        justify-content: center;
-        gap: 3px;
-    }
-
-    .filter-btn {
-        padding: 5px 6px;
-        font-size: 0.55rem;
-    }
-
     .showcase-container {
-        scroll-snap-type: x mandatory; 
-        -webkit-overflow-scrolling: touch; 
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        width: 100vw; /* บังคับให้ container กว้างเต็มจอ */
+        padding: 0;
     }
 
     .card-wrapper {
-        scroll-snap-align: center;
+        flex: 0 0 100vw; /* บังคับให้การ์ด 1 ใบ กินพื้นที่เต็ม 100% ของจอ */
+        width: 100vw;
+        height: 100vh;
+        scroll-snap-align: center; /* บังคับให้การ์ดอยู่กลางจอพอดี */
+        margin: 0; /* ลบ margin ที่เคยดันออก */
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
-    /* ปรับสูตรดันใบแรกและใบสุดท้ายให้สัมพันธ์กับ 250px */
-    .card-wrapper.first-visible {
-        margin-left: calc(50vw - 125px) !important;
-    }
-    .card-wrapper.last-visible {
-        margin-right: calc(50vw - 125px) !important;
-    }
-
-    .card-wrapper.active {
-        filter: blur(0px) brightness(1);
-        transform: scale(1.05);
-        z-index: 10;
+    .card {
+        width: 250px; /* ขนาดการ์ดที่คุณชอบ */
+        height: 357px;
     }
 }
