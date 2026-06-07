@@ -67,6 +67,7 @@ body {
 .filter-btn.active[data-filter="epic"] { background: #a855f7; color: #fff; box-shadow: 0 0 15px rgba(168, 85, 247, 0.6); }
 .filter-btn.active[data-filter="legendary"] { background: #eab308; color: #000; box-shadow: 0 0 15px rgba(234, 179, 8, 0.6); }
 
+/* สั่งเป็น none ไว้ก่อนสำหรับคอมพิวเตอร์ */
 .showcase-container {
     display: flex;
     align-items: center;
@@ -109,7 +110,7 @@ body {
 .card img { width: 100%; height: 100%; object-fit: cover; }
 
 /* =========================================
-   รองรับหน้าจอมือถือ (ปรับความหนืด)
+   รองรับหน้าจอมือถือ (แยกคำสั่ง Snap ออกมา)
 ========================================= */
 @media screen and (max-width: 768px) {
     .showcase-title { top: 2%; font-size: 1.1rem; letter-spacing: 4px; width: 100%; text-align: center; }
@@ -117,11 +118,7 @@ body {
     .filter-btn { padding: 5px 6px; font-size: 0.55rem; }
 
     .showcase-container {
-        /* เปลี่ยนเป็น proximity เพื่อไม่ให้ดีดแรงเกินไป */
-        scroll-snap-type: x proximity !important; 
-        scroll-snap-stop: always !important;
-        scroll-behavior: smooth !important;
-        touch-action: pan-x;
+        scroll-snap-type: x mandatory !important; /* บังคับ Snap เฉพาะมือถือ */
         -webkit-overflow-scrolling: touch;
         gap: 0 !important;
     }
@@ -133,8 +130,7 @@ body {
         justify-content: center;
         align-items: center;
         margin: 0 !important;
-        /* ใช้ transition ที่ช้าลงเพื่อความหนืด */
-        transition: all 0.8s ease-out !important;
+        transition: all 0.5s ease;
         filter: blur(6px) brightness(0.4);
         transform: scale(0.85);
         z-index: 1;
