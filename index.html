@@ -5,65 +5,78 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Character Showcase</title>
     <meta name="google" content="notranslate">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h2 class="showcase-title">COLLECTION SHOWCASE</h2>
+    <h2 class="showcase-title" data-tilt data-tilt-max="15" data-tilt-speed="400">COLLECTION SHOWCASE</h2>
     <div class="category-filters">
         <button class="filter-btn active" data-filter="all">ALL</button>
-        <button class="filter-btn" data-filter="common">COMMON</button>
-        <button class="filter-btn" data-filter="rare">RARE</button>
-        <button class="filter-btn" data-filter="epic">EPIC</button>
-        <button class="filter-btn" data-filter="legendary">LEGENDARY</button>
+        <button class="filter-btn common-btn" data-filter="common">COMMON</button>
+        <button class="filter-btn rare-btn" data-filter="rare">RARE</button>
+        <button class="filter-btn epic-btn" data-filter="epic">EPIC</button>
+        <button class="filter-btn legendary-btn" data-filter="legendary">LEGENDARY</button>
     </div>
     <div class="showcase-container">
-        <div class="card-wrapper" data-category="common"><div class="card"><img src="card1.jpg" onerror="this.src='argus_card.jpg';"></div></div>
-        <div class="card-wrapper" data-category="common"><div class="card"><img src="card2.jpg" onerror="this.src='argus_card.jpg';"></div></div>
-        <div class="card-wrapper" data-category="rare"><div class="card"><img src="card3.jpg" onerror="this.src='argus_card.jpg';"></div></div>
-        <div class="card-wrapper" data-category="rare"><div class="card"><img src="card4.jpg" onerror="this.src='argus_card.jpg';"></div></div>
-        <div class="card-wrapper" data-category="rare"><div class="card"><img src="card5.jpg" onerror="this.src='argus_card.jpg';"></div></div>
-        <div class="card-wrapper" data-category="rare"><div class="card"><img src="card6.jpg" onerror="this.src='argus_card.jpg';"></div></div>
-        <div class="card-wrapper" data-category="epic"><div class="card"><img src="card7.jpg" onerror="this.src='argus_card.jpg';"></div></div>
-        <div class="card-wrapper" data-category="epic"><div class="card"><img src="card8.jpg" onerror="this.src='argus_card.jpg';"></div></div>
-        <div class="card-wrapper" data-category="epic"><div class="card"><img src="card9.jpg" onerror="this.src='argus_card.jpg';"></div></div>
-        <div class="card-wrapper" data-category="epic"><div class="card"><img src="card10.jpg" onerror="this.src='argus_card.jpg';"></div></div>
-        <div class="card-wrapper" data-category="legendary"><div class="card"><img src="card11.jpg" onerror="this.src='argus_card.jpg';"></div></div>
+        <div class="card-wrapper" data-category="common"><div class="card" data-tilt><img src="card1.jpg" alt="Card 1" onerror="this.onerror=null; this.src='argus_card.jpg';"></div></div>
+        <div class="card-wrapper" data-category="common"><div class="card" data-tilt><img src="card2.jpg" alt="Card 2" onerror="this.onerror=null; this.src='argus_card.jpg';"></div></div>
+        <div class="card-wrapper" data-category="rare"><div class="card" data-tilt><img src="card3.jpg" alt="Card 3" onerror="this.onerror=null; this.src='argus_card.jpg';"></div></div>
+        <div class="card-wrapper" data-category="rare"><div class="card" data-tilt><img src="card4.jpg" alt="Card 4" onerror="this.onerror=null; this.src='argus_card.jpg';"></div></div>
+        <div class="card-wrapper" data-category="rare"><div class="card" data-tilt><img src="card5.jpg" alt="Card 5" onerror="this.onerror=null; this.src='argus_card.jpg';"></div></div>
+        <div class="card-wrapper" data-category="rare"><div class="card" data-tilt><img src="card6.jpg" alt="Card 6" onerror="this.onerror=null; this.src='argus_card.jpg';"></div></div>
+        <div class="card-wrapper" data-category="epic"><div class="card" data-tilt><img src="card7.jpg" alt="Card 7" onerror="this.onerror=null; this.src='argus_card.jpg';"></div></div>        
+        <div class="card-wrapper" data-category="epic"><div class="card" data-tilt><img src="card8.jpg" alt="Card 8" onerror="this.onerror=null; this.src='argus_card.jpg';"></div></div>
+        <div class="card-wrapper" data-category="epic"><div class="card" data-tilt><img src="card9.jpg" alt="Card 9" onerror="this.onerror=null; this.src='argus_card.jpg';"></div></div>
+        <div class="card-wrapper" data-category="epic"><div class="card" data-tilt><img src="card10.jpg" alt="Card 10" onerror="this.onerror=null; this.src='argus_card.jpg';"></div></div>
+        <div class="card-wrapper" data-category="legendary"><div class="card" data-tilt><img src="card11.jpg" alt="Card 11" onerror="this.onerror=null; this.src='argus_card.jpg';"></div></div>
     </div>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
     <script>
+        VanillaTilt.init(document.querySelectorAll(".card"), { max: 20, speed: 400, perspective: 1000, glare: false, "max-glare": 0 });
+        VanillaTilt.init(document.querySelector(".showcase-title"));
         const container = document.querySelector('.showcase-container');
         const wrappers = document.querySelectorAll('.card-wrapper');
-        const btns = document.querySelectorAll('.filter-btn');
-
-        function applyFilter(cat) {
-            wrappers.forEach(w => {
-                if (cat === 'all' || w.dataset.category === cat) w.classList.remove('hidden');
-                else w.classList.add('hidden');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        function applyFilter(category) {
+            let visibleWrappers = [];
+            wrappers.forEach(wrapper => {
+                wrapper.classList.remove('first-visible', 'last-visible', 'active');
+                if (category === 'all' || wrapper.getAttribute('data-category') === category) {
+                    wrapper.classList.remove('hidden');
+                    visibleWrappers.push(wrapper);
+                } else {
+                    wrapper.classList.add('hidden');
+                }
             });
-            const first = document.querySelector('.card-wrapper:not(.hidden)');
-            if (first) first.scrollIntoView({ behavior: 'auto', inline: 'center' });
-            setTimeout(updateCenter, 100);
+            if (visibleWrappers.length > 0) {
+                visibleWrappers[0].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            }
+            setTimeout(updateCenterCard, 500);
         }
-
-        function updateCenter() {
-            const center = window.innerWidth / 2;
-            let best = null, min = Infinity;
-            document.querySelectorAll('.card-wrapper:not(.hidden)').forEach(w => {
-                const dist = Math.abs(center - (w.getBoundingClientRect().left + w.offsetWidth/2));
-                if (dist < min) { min = dist; best = w; }
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                applyFilter(btn.getAttribute('data-filter'));
+            });
+        });
+        function updateCenterCard() {
+            const centerPoint = window.innerWidth / 2;
+            let minDistance = Infinity;
+            let centerWrapper = null;
+            const visibleWrappers = document.querySelectorAll('.card-wrapper:not(.hidden)');
+            visibleWrappers.forEach(wrapper => {
+                const rect = wrapper.getBoundingClientRect();
+                const wrapperCenter = rect.left + (rect.width / 2);
+                const distance = Math.abs(centerPoint - wrapperCenter);
+                if (distance < minDistance) { minDistance = distance; centerWrapper = wrapper; }
             });
             wrappers.forEach(w => w.classList.remove('active'));
-            if (best) best.classList.add('active');
+            if (centerWrapper) centerWrapper.classList.add('active');
         }
-
-        btns.forEach(b => b.addEventListener('click', () => {
-            btns.forEach(btn => btn.classList.remove('active'));
-            b.classList.add('active');
-            applyFilter(b.dataset.filter);
-        }));
-
-        container.addEventListener('scroll', updateCenter);
-        window.addEventListener('resize', updateCenter);
+        container.addEventListener('scroll', updateCenterCard);
+        window.addEventListener('resize', updateCenterCard);
         applyFilter('all');
     </script>
 </body>
