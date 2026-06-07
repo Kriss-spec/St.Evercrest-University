@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Character Showcase</title>
+    
     <link rel="icon" type="image/png" href="favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
@@ -22,59 +23,57 @@
     <div class="showcase-container">
         <div class="card-wrapper" data-category="common"><div class="card" data-tilt><img src="card1.jpg" alt="Card 1" onerror="this.onerror=null; this.src='argus_card.jpg';"></div></div>
         <div class="card-wrapper" data-category="common"><div class="card" data-tilt><img src="card2.jpg" alt="Card 2" onerror="this.onerror=null; this.src='argus_card.jpg';"></div></div>
+
         <div class="card-wrapper" data-category="rare"><div class="card" data-tilt><img src="card3.jpg" alt="Card 3" onerror="this.onerror=null; this.src='argus_card.jpg';"></div></div>
         <div class="card-wrapper" data-category="rare"><div class="card" data-tilt><img src="card4.jpg" alt="Card 4" onerror="this.onerror=null; this.src='argus_card.jpg';"></div></div>
         <div class="card-wrapper" data-category="rare"><div class="card" data-tilt><img src="card5.jpg" alt="Card 5" onerror="this.onerror=null; this.src='argus_card.jpg';"></div></div>
         <div class="card-wrapper" data-category="rare"><div class="card" data-tilt><img src="card6.jpg" alt="Card 6" onerror="this.onerror=null; this.src='argus_card.jpg';"></div></div>
+
         <div class="card-wrapper" data-category="epic"><div class="card" data-tilt><img src="card7.jpg" alt="Card 7" onerror="this.onerror=null; this.src='argus_card.jpg';"></div></div>        
         <div class="card-wrapper" data-category="epic"><div class="card" data-tilt><img src="card8.jpg" alt="Card 8" onerror="this.onerror=null; this.src='argus_card.jpg';"></div></div>
         <div class="card-wrapper" data-category="epic"><div class="card" data-tilt><img src="card9.jpg" alt="Card 9" onerror="this.onerror=null; this.src='argus_card.jpg';"></div></div>
         <div class="card-wrapper" data-category="epic"><div class="card" data-tilt><img src="card10.jpg" alt="Card 10" onerror="this.onerror=null; this.src='argus_card.jpg';"></div></div>
+        
         <div class="card-wrapper" data-category="legendary"><div class="card" data-tilt><img src="card11.jpg" alt="Card 11" onerror="this.onerror=null; this.src='argus_card.jpg';"></div></div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
     <script>
-        VanillaTilt.init(document.querySelectorAll(".card"), { max: 20, speed: 400, perspective: 1000, glare: false, "max-glare": 0 });
+        // ปิด Glare (เงาสะท้อน) ของการ์ดถาวร
+        VanillaTilt.init(document.querySelectorAll(".card"), { 
+            max: 20, speed: 400, perspective: 1000, glare: false, "max-glare": 0 
+        });
         VanillaTilt.init(document.querySelector(".showcase-title"));
 
         const container = document.querySelector('.showcase-container');
         const wrappers = document.querySelectorAll('.card-wrapper');
         const filterBtns = document.querySelectorAll('.filter-btn');
-        let scrollTimeout;
 
-        // ฟังก์ชันดีดเข้ากลางจอ (ทำงานเฉพาะ Desktop)
-        function snapToCenter() {
-            if (window.innerWidth <= 768) return; // ไม่ทำงานในมือถือ
-            
-            const center = window.innerWidth / 2;
-            let best = null, min = Infinity;
-            document.querySelectorAll('.card-wrapper:not(.hidden)').forEach(w => {
-                const dist = Math.abs(center - (w.getBoundingClientRect().left + w.offsetWidth / 2));
-                if (dist < min) { min = dist; best = w; }
-            });
-            if (best) best.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-        }
-
-        // ฟัง Event การเลื่อน
-        container.addEventListener('scroll', () => {
-            updateCenterCard();
-            if (window.innerWidth > 768) {
-                clearTimeout(scrollTimeout);
-                scrollTimeout = setTimeout(snapToCenter, 200);
-            }
-        });
-
+        // ฟังก์ชันกรองการ์ด
         function applyFilter(category) {
-            wrappers.forEach(w => {
-                if (category === 'all' || w.getAttribute('data-category') === category) w.classList.remove('hidden');
-                else w.classList.add('hidden');
+            let visibleWrappers = [];
+            wrappers.forEach(wrapper => {
+                wrapper.classList.remove('first-visible', 'last-visible', 'active');
+                
+                if (category === 'all' || wrapper.getAttribute('data-category') === category) {
+                    wrapper.classList.remove('hidden');
+                    visibleWrappers.push(wrapper);
+                } else {
+                    wrapper.classList.add('hidden');
+                }
             });
-            const first = document.querySelector('.card-wrapper:not(.hidden)');
-            if (first) first.scrollIntoView({ behavior: 'auto', inline: 'center' });
-            setTimeout(updateCenterCard, 100);
+
+            if (visibleWrappers.length > 0) {
+                visibleWrappers[0].classList.add('first-visible');
+                visibleWrappers[visibleWrappers.length - 1].classList.add('last-visible');
+                // เลื่อนไปใบแรกของหมวด
+                visibleWrappers[0].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            }
+            // รอกันพลาดแล้วค่อยซูม
+            setTimeout(updateCenterCard, 600);
         }
 
+        // กดปุ่มเพื่อเปลี่ยนหมวดหมู่
         filterBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 filterBtns.forEach(b => b.classList.remove('active'));
@@ -83,21 +82,45 @@
             });
         });
 
+        // จัดการเลื่อนเมาส์
+        container.addEventListener('wheel', (e) => {
+            if (e.deltaY !== 0) {
+                e.preventDefault();
+                container.scrollBy({ left: e.deltaY * 2, behavior: 'auto' });
+            }
+        });
+
+        // คลิกเพื่อเลื่อนไปตรงกลาง
+        wrappers.forEach(wrapper => {
+            wrapper.addEventListener('click', () => {
+                wrapper.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+            });
+        });
+
+        // ตรวจสอบใบที่อยู่ตรงกลาง
         function updateCenterCard() {
             const centerPoint = window.innerWidth / 2;
             let minDistance = Infinity;
             let centerWrapper = null;
-            document.querySelectorAll('.card-wrapper:not(.hidden)').forEach(wrapper => {
+            const visibleWrappers = document.querySelectorAll('.card-wrapper:not(.hidden)');
+
+            visibleWrappers.forEach(wrapper => {
                 const rect = wrapper.getBoundingClientRect();
                 const wrapperCenter = rect.left + (rect.width / 2);
                 const distance = Math.abs(centerPoint - wrapperCenter);
-                if (distance < minDistance) { minDistance = distance; centerWrapper = wrapper; }
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    centerWrapper = wrapper;
+                }
             });
+
             wrappers.forEach(w => w.classList.remove('active'));
             if (centerWrapper) centerWrapper.classList.add('active');
         }
 
+        container.addEventListener('scroll', updateCenterCard);
         window.addEventListener('resize', updateCenterCard);
+        
         applyFilter('all');
     </script>
 </body>
