@@ -67,7 +67,6 @@ body {
 .filter-btn.active[data-filter="epic"] { background: #a855f7; color: #fff; box-shadow: 0 0 15px rgba(168, 85, 247, 0.6); }
 .filter-btn.active[data-filter="legendary"] { background: #eab308; color: #000; box-shadow: 0 0 15px rgba(234, 179, 8, 0.6); }
 
-/* สั่งเป็น none ไว้ก่อนสำหรับคอมพิวเตอร์ */
 .showcase-container {
     display: flex;
     align-items: center;
@@ -110,7 +109,7 @@ body {
 .card img { width: 100%; height: 100%; object-fit: cover; }
 
 /* =========================================
-   รองรับหน้าจอมือถือ (แยกคำสั่ง Snap ออกมา)
+   รองรับหน้าจอมือถือ (ปรับจังหวะการเลื่อน)
 ========================================= */
 @media screen and (max-width: 768px) {
     .showcase-title { top: 2%; font-size: 1.1rem; letter-spacing: 4px; width: 100%; text-align: center; }
@@ -118,7 +117,9 @@ body {
     .filter-btn { padding: 5px 6px; font-size: 0.55rem; }
 
     .showcase-container {
-        scroll-snap-type: x mandatory !important; /* บังคับ Snap เฉพาะมือถือ */
+        scroll-snap-type: x mandatory !important; 
+        scroll-snap-stop: always !important; /* บังคับให้หยุดที่การ์ดทีละใบ */
+        touch-action: pan-x;                 /* ล็อคให้ปัดได้แค่แนวนอน */
         -webkit-overflow-scrolling: touch;
         gap: 0 !important;
     }
