@@ -60,6 +60,7 @@ body {
     backdrop-filter: blur(5px);
 }
 
+.filter-btn:hover { background: rgba(255, 255, 255, 0.1); }
 .filter-btn.active[data-filter="all"] { background: #ffffff; color: #000; }
 .filter-btn.active[data-filter="common"] { background: #9ca3af; color: #000; }
 .filter-btn.active[data-filter="rare"] { background: #3b82f6; color: #fff; }
@@ -73,7 +74,7 @@ body {
     height: 100vh;
     overflow-x: auto;
     scrollbar-width: none;
-    /* ลบ scroll-snap-type ออกเพื่อให้คอมเลื่อนได้อิสระ */
+    scroll-snap-type: none; /* ปิดการ Snap ในคอม */
 }
 
 .showcase-container::-webkit-scrollbar { display: none; }
@@ -113,25 +114,26 @@ body {
 /* --- ส่วนของมือถือ (Snap ทีละใบ) --- */
 @media screen and (max-width: 768px) {
     .showcase-container {
-        scroll-snap-type: x mandatory; /* สั่งให้มือถือดูดการ์ดลงล็อค */
+        scroll-snap-type: x mandatory !important; /* บังคับ Snap เฉพาะมือถือ */
         -webkit-overflow-scrolling: touch;
+        gap: 0 !important;
     }
 
     .card-wrapper {
-        flex: 0 0 100vw; /* การ์ด 1 ใบเต็มจอ */
-        width: 100vw;
-        height: 100vh;
-        scroll-snap-align: center; /* ดูดใบนั้นไว้ตรงกลาง */
-        margin: 0; 
+        flex: 0 0 100vw !important; /* บังคับให้การ์ดกว้างเต็มจอ */
+        width: 100vw !important;
+        scroll-snap-align: center !important; 
+        margin: 0 !important;
         display: flex;
         justify-content: center;
         align-items: center;
-        filter: blur(0px) brightness(1); /* มือถือไม่ต้องเบลอใบข้างๆ เพื่อความชัดเจน */
-        transform: scale(1);
+        filter: blur(0px) brightness(1) !important;
+        transform: scale(1) !important;
+        z-index: 10 !important;
     }
 
     .card {
-        width: 250px; 
-        height: 357px;
+        width: 250px !important; 
+        height: 357px !important;
     }
 }
