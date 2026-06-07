@@ -19,17 +19,30 @@
     <div class="showcase-container">
         <div class="card-wrapper" data-category="common"><div class="card"><img src="card1.jpg" onerror="this.src='argus_card.jpg';"></div></div>
         <div class="card-wrapper" data-category="common"><div class="card"><img src="card2.jpg" onerror="this.src='argus_card.jpg';"></div></div>
-        </div>
+        <div class="card-wrapper" data-category="rare"><div class="card"><img src="card3.jpg" onerror="this.src='argus_card.jpg';"></div></div>
+        <div class="card-wrapper" data-category="rare"><div class="card"><img src="card4.jpg" onerror="this.src='argus_card.jpg';"></div></div>
+        <div class="card-wrapper" data-category="rare"><div class="card"><img src="card5.jpg" onerror="this.src='argus_card.jpg';"></div></div>
+        <div class="card-wrapper" data-category="rare"><div class="card"><img src="card6.jpg" onerror="this.src='argus_card.jpg';"></div></div>
+        <div class="card-wrapper" data-category="epic"><div class="card"><img src="card7.jpg" onerror="this.src='argus_card.jpg';"></div></div>
+        <div class="card-wrapper" data-category="epic"><div class="card"><img src="card8.jpg" onerror="this.src='argus_card.jpg';"></div></div>
+        <div class="card-wrapper" data-category="epic"><div class="card"><img src="card9.jpg" onerror="this.src='argus_card.jpg';"></div></div>
+        <div class="card-wrapper" data-category="epic"><div class="card"><img src="card10.jpg" onerror="this.src='argus_card.jpg';"></div></div>
+        <div class="card-wrapper" data-category="legendary"><div class="card"><img src="card11.jpg" onerror="this.src='argus_card.jpg';"></div></div>
+    </div>
+
     <script>
         const container = document.querySelector('.showcase-container');
         const wrappers = document.querySelectorAll('.card-wrapper');
         const btns = document.querySelectorAll('.filter-btn');
 
         function applyFilter(cat) {
-            wrappers.forEach(w => w.classList.toggle('hidden', cat !== 'all' && w.dataset.category !== cat));
+            wrappers.forEach(w => {
+                if (cat === 'all' || w.dataset.category === cat) w.classList.remove('hidden');
+                else w.classList.add('hidden');
+            });
             const first = document.querySelector('.card-wrapper:not(.hidden)');
             if (first) first.scrollIntoView({ behavior: 'auto', inline: 'center' });
-            setTimeout(updateCenter, 200);
+            setTimeout(updateCenter, 100);
         }
 
         function updateCenter() {
