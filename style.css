@@ -37,7 +37,6 @@ body {
     to { background-position: 200% center; }
 }
 
-/* ตั้งค่าระบบปุ่มกรองหมวดหมู่ */
 .category-filters {
     position: absolute;
     top: 13%;
@@ -61,77 +60,42 @@ body {
     backdrop-filter: blur(5px);
 }
 
-.filter-btn:hover {
-    background: rgba(255, 255, 255, 0.1);
-}
+.filter-btn:hover { background: rgba(255, 255, 255, 0.1); }
+.filter-btn.active[data-filter="all"] { background: #ffffff; color: #000; box-shadow: 0 0 15px rgba(255, 255, 255, 0.6); }
+.filter-btn.active[data-filter="common"] { background: #9ca3af; color: #000; box-shadow: 0 0 15px rgba(156, 163, 175, 0.6); }
+.filter-btn.active[data-filter="rare"] { background: #3b82f6; color: #fff; box-shadow: 0 0 15px rgba(59, 130, 246, 0.6); }
+.filter-btn.active[data-filter="epic"] { background: #a855f7; color: #fff; box-shadow: 0 0 15px rgba(168, 85, 247, 0.6); }
+.filter-btn.active[data-filter="legendary"] { background: #eab308; color: #000; box-shadow: 0 0 15px rgba(234, 179, 8, 0.6); }
 
-.filter-btn.active[data-filter="all"] {
-    background: #ffffff; color: #000; box-shadow: 0 0 15px rgba(255, 255, 255, 0.6); border-color: transparent;
-}
-.filter-btn.active[data-filter="common"] {
-    background: #9ca3af; color: #000; box-shadow: 0 0 15px rgba(156, 163, 175, 0.6); border-color: transparent;
-}
-.filter-btn.active[data-filter="rare"] {
-    background: #3b82f6; color: #fff; box-shadow: 0 0 15px rgba(59, 130, 246, 0.6); border-color: transparent;
-}
-.filter-btn.active[data-filter="epic"] {
-    background: #a855f7; color: #fff; box-shadow: 0 0 15px rgba(168, 85, 247, 0.6); border-color: transparent;
-}
-.filter-btn.active[data-filter="legendary"] {
-    background: #eab308; color: #000; box-shadow: 0 0 15px rgba(234, 179, 8, 0.6); border-color: transparent;
-}
-
+/* สั่งเป็น none ไว้ก่อนสำหรับคอมพิวเตอร์ */
 .showcase-container {
     display: flex;
     align-items: center;
-    gap: 0px;
     width: 100vw;
     height: 100vh;
     overflow-x: auto;
-    scroll-snap-type: x mandatory; 
     scrollbar-width: none;
+    scroll-snap-type: none; 
 }
 
-.showcase-container::-webkit-scrollbar {
-    display: none;
-}
+.showcase-container::-webkit-scrollbar { display: none; }
 
-/* -------------------------------------------
-   อัปเดตขนาดการ์ดและตำแหน่ง
-------------------------------------------- */
 .card-wrapper {
     flex: 0 0 auto;
     width: 350px;
     height: 500px;
     margin: 0 -30px; 
-    
-    /* +++ ดันลงมาอีก! ปรับจาก 10vh เป็น 20vh (ถ้ายังทับอยู่อีก ให้ลองแก้เลข 20 เป็น 25 หรือ 30 ได้เลยครับ) +++ */
     margin-top: 20vh; 
-    
-    scroll-snap-align: center;
     transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
     filter: blur(8px) brightness(0.4);
     transform: scale(0.7);
     z-index: 1;
 }
 
-.card-wrapper.hidden {
-    display: none !important;
-}
-
-/* ปรับระยะขอบกลับเป็น 175px (ครึ่งนึงของ 350px) */
-.card-wrapper.first-visible {
-    margin-left: calc(50vw - 175px) !important;
-}
-.card-wrapper.last-visible {
-    margin-right: calc(50vw - 175px) !important;
-}
-
-.card-wrapper.active {
-    filter: blur(0px) brightness(1);
-    transform: scale(1.1); /* กลับมาซูม 110% เท่าเดิม */
-    z-index: 10;
-}
+.card-wrapper.hidden { display: none !important; }
+.card-wrapper.first-visible { margin-left: calc(50vw - 175px) !important; }
+.card-wrapper.last-visible { margin-right: calc(50vw - 175px) !important; }
+.card-wrapper.active { filter: blur(0px) brightness(1); transform: scale(1.1); z-index: 10; }
 
 .card {
     width: 100%;
@@ -141,52 +105,22 @@ body {
     box-shadow: 0 30px 60px rgba(0, 0, 0, 0.9);
     overflow: hidden;
     cursor: pointer;
-    /* (ลบ preserve-3d ออกแล้วเพื่อแก้ภาพซูมทะลุจอ) */
 }
 
-.card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    /* (ลบ translateZ ออกแล้วเพื่อแก้ภาพซูมทะลุจอ) */
-}
+.card img { width: 100%; height: 100%; object-fit: cover; }
+
 /* =========================================
-   รองรับหน้าจอมือถือ (ปรับกึ่งกลางแบบเป๊ะๆ)
+   รองรับหน้าจอมือถือ (แยกคำสั่ง Snap ออกมา)
 ========================================= */
 @media screen and (max-width: 768px) {
-    /* 1. จัดหัวข้อให้กระชับขึ้น */
-    .showcase-title {
-        top: 2%;
-        font-size: 1.1rem;
-        letter-spacing: 4px;
-        width: 100%;
-        text-align: center;
-    }
+    .showcase-title { top: 2%; font-size: 1.1rem; letter-spacing: 4px; width: 100%; text-align: center; }
+    .category-filters { top: 10%; width: 98vw; justify-content: center; gap: 3px; }
+    .filter-btn { padding: 5px 6px; font-size: 0.55rem; }
 
-    /* 2. หมวดหมู่ย้ายลงมานิดเดียว */
-    .category-filters {
-        top: 10%;
-        width: 98vw;
-        flex-wrap: nowrap;
-        justify-content: center;
-        gap: 3px;
-    }
-
-    .filter-btn {
-        padding: 5px 6px;
-        font-size: 0.55rem;
-    }
-
-    /* 3. ปรับให้ Showcase Container จัดการกึ่งกลางแนวตั้งให้เอง */
     .showcase-container {
-        display: flex;
-        overflow-x: auto;
-        scroll-snap-type: x mandatory !important;
+        scroll-snap-type: x mandatory !important; /* บังคับ Snap เฉพาะมือถือ */
         -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-        width: 100vw;
-        padding: 0;
-        gap: 0;
+        gap: 0 !important;
     }
 
     .card-wrapper {
@@ -196,20 +130,10 @@ body {
         justify-content: center;
         align-items: center;
         margin: 0 !important;
-        
-        /* นำเอฟเฟกต์เบลอและความย่อ/ขยายกลับมา */
         transition: all 0.5s ease;
-        filter: blur(6px) brightness(0.4); /* เบลอและมืดลงเมื่อไม่ได้โฟกัส */
-        transform: scale(0.85);             /* ย่อขนาดใบที่ไม่โฟกัส */
+        filter: blur(6px) brightness(0.4);
+        transform: scale(0.85);
         z-index: 1;
-    }
-
-    /* ปรับสูตรดันใบแรกและใบสุดท้ายให้สัมพันธ์กับ 250px */
-    .card-wrapper.first-visible {
-        margin-left: calc(50vw - 125px) !important;
-    }
-    .card-wrapper.last-visible {
-        margin-right: calc(50vw - 125px) !important;
     }
 
     .card-wrapper.active {
@@ -217,6 +141,7 @@ body {
         transform: scale(1) !important;
         z-index: 10;
     }
+
     .card {
         width: 250px !important;
         height: 357px !important;
