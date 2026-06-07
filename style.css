@@ -61,11 +61,7 @@ body {
 }
 
 .filter-btn:hover { background: rgba(255, 255, 255, 0.1); }
-.filter-btn.active[data-filter="all"] { background: #ffffff; color: #000; box-shadow: 0 0 15px rgba(255, 255, 255, 0.6); }
-.filter-btn.active[data-filter="common"] { background: #9ca3af; color: #000; box-shadow: 0 0 15px rgba(156, 163, 175, 0.6); }
-.filter-btn.active[data-filter="rare"] { background: #3b82f6; color: #fff; box-shadow: 0 0 15px rgba(59, 130, 246, 0.6); }
-.filter-btn.active[data-filter="epic"] { background: #a855f7; color: #fff; box-shadow: 0 0 15px rgba(168, 85, 247, 0.6); }
-.filter-btn.active[data-filter="legendary"] { background: #eab308; color: #000; box-shadow: 0 0 15px rgba(234, 179, 8, 0.6); }
+.filter-btn.active { background: #ffffff; color: #000; box-shadow: 0 0 15px rgba(255, 255, 255, 0.6); }
 
 .showcase-container {
     display: flex;
@@ -92,8 +88,6 @@ body {
 }
 
 .card-wrapper.hidden { display: none !important; }
-.card-wrapper.first-visible { margin-left: calc(50vw - 175px) !important; }
-.card-wrapper.last-visible { margin-right: calc(50vw - 175px) !important; }
 .card-wrapper.active { filter: blur(0px) brightness(1); transform: scale(1.1); z-index: 10; }
 
 .card {
@@ -111,13 +105,11 @@ body {
 @media screen and (max-width: 768px) {
     .showcase-title { top: 2%; font-size: 1.1rem; letter-spacing: 4px; width: 100%; text-align: center; }
     .category-filters { top: 10%; width: 98vw; justify-content: center; gap: 3px; }
-    .filter-btn { padding: 5px 6px; font-size: 0.55rem; }
-
+    
     .showcase-container {
         scroll-snap-type: x mandatory !important; 
-        scroll-snap-stop: always !important;
-        scroll-behavior: smooth !important;
-        -webkit-overflow-scrolling: touch;
+        scroll-snap-stop: always !important; /* บังคับหยุดทีละใบแบบเด็ดขาด */
+        overscroll-behavior-x: contain !important; /* ป้องกันการไหล */
         gap: 0 !important;
         padding: 0 !important;
         width: 100vw;
@@ -126,24 +118,15 @@ body {
     .card-wrapper {
         flex: 0 0 100vw !important;
         scroll-snap-align: center !important;
-        display: flex;
-        justify-content: center;
-        align-items: center;
         margin: 0 !important;
         filter: blur(6px) brightness(0.4);
         transform: scale(0.85);
-        z-index: 1;
     }
 
     .card-wrapper.active {
         filter: blur(0px) brightness(1) !important;
         transform: scale(1) !important;
-        z-index: 10;
     }
 
-    .card {
-        width: 250px !important;
-        height: 357px !important;
-        margin: 0;
-    }
+    .card { width: 250px !important; height: 357px !important; }
 }
