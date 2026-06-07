@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h2 class="showcase-title" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.3">St.Evercrest Card</h2>
+    <h2 class="showcase-title" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.3">COLLECTION SHOWCASE</h2>
 
     <!-- ระบบปุ่มกรองหมวดหมู่ -->
     <div class="category-filters">
@@ -48,11 +48,10 @@
         const wrappers = document.querySelectorAll('.card-wrapper');
         const filterBtns = document.querySelectorAll('.filter-btn');
 
-        // ฟังก์ชันกรองการ์ดตามหมวดหมู่
         function applyFilter(category) {
             let visibleWrappers = [];
             wrappers.forEach(wrapper => {
-                wrapper.classList.remove('first-visible', 'last-visible'); // เคลียร์คลาสระยะห่าง
+                wrapper.classList.remove('first-visible', 'last-visible', 'active'); // เคลียร์คลาสให้หมด
                 
                 if (category === 'all' || wrapper.getAttribute('data-category') === category) {
                     wrapper.classList.remove('hidden');
@@ -62,18 +61,19 @@
                 }
             });
 
-            // กำหนดใบแรกและใบสุดท้ายของหมวดนั้นๆ ให้มีระยะดันตรงกลาง
             if (visibleWrappers.length > 0) {
                 visibleWrappers[0].classList.add('first-visible');
                 visibleWrappers[visibleWrappers.length - 1].classList.add('last-visible');
+                
+                // ใช้การเลื่อนไปใบแรก
+                visibleWrappers[0].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+
+                // **หัวใจสำคัญ:** รอให้เลื่อนเสร็จแล้วค่อยสั่งซูมใบที่อยู่ตรงกลางจริงๆ
+                setTimeout(() => {
+                    updateCenterCard(); 
+                }, 250); // ตั้งเวลา 500ms ให้จังหวะเลื่อนมันจบสนิท
             }
-
-            // เลื่อนกลับไปจุดเริ่มต้นเมื่อเปลี่ยนหมวดหมู่
-            container.scrollTo({ left: 0, behavior: 'smooth' });
-            setTimeout(updateCenterCard, 100);
         }
-
-        // กดปุ่มเพื่อเปลี่ยนหมวดหมู่
         filterBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 filterBtns.forEach(b => b.classList.remove('active'));
