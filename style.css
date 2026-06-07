@@ -131,7 +131,7 @@ body {
         justify-content: center;
         align-items: center;
         margin: 0 !important;
-        transition: all 0.5s ease;
+        transition: all 3s ease;
         filter: blur(6px) brightness(0.4);
         transform: scale(0.85);
         z-index: 1;
