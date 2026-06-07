@@ -109,7 +109,7 @@ body {
 .card img { width: 100%; height: 100%; object-fit: cover; }
 
 /* =========================================
-   รองรับหน้าจอมือถือ (ปรับ Sensitivity ให้หนืดและนิ่ง)
+   รองรับหน้าจอมือถือ (ปรับจังหวะการเลื่อน)
 ========================================= */
 @media screen and (max-width: 768px) {
     .showcase-title { top: 2%; font-size: 1.1rem; letter-spacing: 4px; width: 100%; text-align: center; }
@@ -118,13 +118,10 @@ body {
 
     .showcase-container {
         scroll-snap-type: x mandatory !important; 
-        scroll-snap-stop: always !important;      /* บังคับหยุดทีละใบเป๊ะๆ */
-        scroll-behavior: smooth !important;       /* เพิ่มความนุ่มให้การเลื่อนไม่กระชาก */
-        touch-action: pan-x;                      /* ให้เลื่อนได้เฉพาะแนวนอน */
-        -webkit-overflow-scrolling: touch;        /* เอฟเฟกต์การเลื่อนธรรมชาติบน iOS/Android */
+        scroll-snap-stop: always !important; /* บังคับให้หยุดที่การ์ดทีละใบ */
+        touch-action: pan-x;                 /* ล็อคให้ปัดได้แค่แนวนอน */
+        -webkit-overflow-scrolling: touch;
         gap: 0 !important;
-        padding-left: 0;
-        padding-right: 0;
     }
 
     .card-wrapper {
@@ -134,7 +131,7 @@ body {
         justify-content: center;
         align-items: center;
         margin: 0 !important;
-        transition: all 0.4s ease-out;            /* ปรับความเร็วการเปลี่ยนผ่านให้รู้สึกหน่วงขึ้น */
+        transition: all 0.5s ease;
         filter: blur(6px) brightness(0.4);
         transform: scale(0.85);
         z-index: 1;
