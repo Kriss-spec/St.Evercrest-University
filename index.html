@@ -41,7 +41,6 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
     <script>
-        // ปิด Glare (เงาสะท้อน) ของการ์ดถาวร
         VanillaTilt.init(document.querySelectorAll(".card"), { 
             max: 20, speed: 400, perspective: 1000, glare: false, "max-glare": 0 
         });
@@ -51,12 +50,30 @@
         const wrappers = document.querySelectorAll('.card-wrapper');
         const filterBtns = document.querySelectorAll('.filter-btn');
 
-        // ฟังก์ชันกรองการ์ด
+        // ฟังก์ชันคุมความเร็วปัดบนมือถือ (Sensitivity Control)
+        if ('ontouchstart' in window) {
+            let isDown = false;
+            let startX, scrollLeft;
+            const scrollSpeed = 0.35; // <--- ปรับเลขนี้: ยิ่งน้อยยิ่งหนืด
+
+            container.addEventListener('touchstart', (e) => {
+                isDown = true;
+                startX = e.touches[0].pageX - container.offsetLeft;
+                scrollLeft = container.scrollLeft;
+            });
+            container.addEventListener('touchend', () => isDown = false);
+            container.addEventListener('touchmove', (e) => {
+                if (!isDown) return;
+                const x = e.touches[0].pageX - container.offsetLeft;
+                const walk = (x - startX) * scrollSpeed;
+                container.scrollLeft = scrollLeft - walk;
+            }, {passive: true});
+        }
+
         function applyFilter(category) {
             let visibleWrappers = [];
             wrappers.forEach(wrapper => {
                 wrapper.classList.remove('first-visible', 'last-visible', 'active');
-                
                 if (category === 'all' || wrapper.getAttribute('data-category') === category) {
                     wrapper.classList.remove('hidden');
                     visibleWrappers.push(wrapper);
@@ -64,18 +81,14 @@
                     wrapper.classList.add('hidden');
                 }
             });
-
             if (visibleWrappers.length > 0) {
                 visibleWrappers[0].classList.add('first-visible');
                 visibleWrappers[visibleWrappers.length - 1].classList.add('last-visible');
-                // เลื่อนไปใบแรกของหมวด
                 visibleWrappers[0].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
             }
-            // รอกันพลาดแล้วค่อยซูม
             setTimeout(updateCenterCard, 600);
         }
 
-        // กดปุ่มเพื่อเปลี่ยนหมวดหมู่
         filterBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 filterBtns.forEach(b => b.classList.remove('active'));
@@ -84,7 +97,6 @@
             });
         });
 
-        // จัดการเลื่อนเมาส์
         container.addEventListener('wheel', (e) => {
             if (e.deltaY !== 0) {
                 e.preventDefault();
@@ -92,20 +104,11 @@
             }
         });
 
-        // คลิกเพื่อเลื่อนไปตรงกลาง
-        wrappers.forEach(wrapper => {
-            wrapper.addEventListener('click', () => {
-                wrapper.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-            });
-        });
-
-        // ตรวจสอบใบที่อยู่ตรงกลาง
         function updateCenterCard() {
             const centerPoint = window.innerWidth / 2;
             let minDistance = Infinity;
             let centerWrapper = null;
             const visibleWrappers = document.querySelectorAll('.card-wrapper:not(.hidden)');
-
             visibleWrappers.forEach(wrapper => {
                 const rect = wrapper.getBoundingClientRect();
                 const wrapperCenter = rect.left + (rect.width / 2);
@@ -115,14 +118,12 @@
                     centerWrapper = wrapper;
                 }
             });
-
             wrappers.forEach(w => w.classList.remove('active'));
             if (centerWrapper) centerWrapper.classList.add('active');
         }
 
         container.addEventListener('scroll', updateCenterCard);
         window.addEventListener('resize', updateCenterCard);
-        
         applyFilter('all');
     </script>
 </body>
