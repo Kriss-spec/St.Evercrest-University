@@ -1,46 +1,151 @@
-/* --- ส่วนเริ่มต้น: Layout และพื้นหลัง --- */
 body {
-    display: flex; flex-direction: column; justify-content: center; align-items: center;
-    min-height: 100vh; margin: 0; font-family: 'Arial', sans-serif; color: white;
-    overflow: hidden; background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('bg.png');
-    background-size: cover; background-position: center; background-attachment: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    color: white;
+    overflow: hidden; 
+    background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('bg.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
 }
 
 .showcase-title {
-    position: absolute; top: 3%; font-family: 'Cinzel', serif; font-size: 2.2rem;
-    letter-spacing: 12px; font-weight: 600; z-index: 100; margin: 0;
+    position: absolute;
+    top: 3%;
+    font-family: 'Cinzel', serif;
+    font-size: 2.2rem;
+    letter-spacing: 12px;
+    font-weight: 600;
+    z-index: 100;
+    margin: 0;
+    cursor: default;
     background: linear-gradient(to right, #7a8c9e, #ffffff, #8ca3be, #7a8c9e);
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 0 15px rgba(140, 163, 190, 0.6)); animation: shine 4s linear infinite;
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 15px rgba(140, 163, 190, 0.6));
+    animation: shine 4s linear infinite;
+    transform-style: preserve-3d;
 }
-@keyframes shine { to { background-position: 200% center; } }
 
-/* --- ส่วนของปุ่ม Filter --- */
-.category-filters { position: absolute; top: 13%; display: flex; gap: 15px; z-index: 100; }
-.filter-btn { background: rgba(26, 26, 36, 0.6); border: 1px solid #4a5a6a; color: #a3a3c2; padding: 8px 25px; border-radius: 30px; cursor: pointer; }
-.filter-btn.active { background: #ffffff; color: #000; }
+@keyframes shine {
+    to { background-position: 200% center; }
+}
 
-/* --- ส่วนการ์ด (Structure: Wrapper > Tilt > Inner) --- */
-.showcase-container { display: flex; align-items: center; width: 100vw; height: 100vh; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
-.showcase-container::-webkit-scrollbar { display: none; }
+/* ตั้งค่าระบบปุ่มกรองหมวดหมู่ */
+.category-filters {
+    position: absolute;
+    top: 13%;
+    display: flex;
+    gap: 15px;
+    z-index: 100;
+}
 
+.filter-btn {
+    background: rgba(26, 26, 36, 0.6);
+    border: 1px solid #4a5a6a;
+    color: #a3a3c2;
+    padding: 8px 25px;
+    border-radius: 30px;
+    font-family: 'Cinzel', serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+.filter-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.filter-btn.active[data-filter="all"] {
+    background: #ffffff; color: #000; box-shadow: 0 0 15px rgba(255, 255, 255, 0.6); border-color: transparent;
+}
+.filter-btn.active[data-filter="common"] {
+    background: #9ca3af; color: #000; box-shadow: 0 0 15px rgba(156, 163, 175, 0.6); border-color: transparent;
+}
+.filter-btn.active[data-filter="rare"] {
+    background: #3b82f6; color: #fff; box-shadow: 0 0 15px rgba(59, 130, 246, 0.6); border-color: transparent;
+}
+.filter-btn.active[data-filter="epic"] {
+    background: #a855f7; color: #fff; box-shadow: 0 0 15px rgba(168, 85, 247, 0.6); border-color: transparent;
+}
+.filter-btn.active[data-filter="legendary"] {
+    background: #eab308; color: #000; box-shadow: 0 0 15px rgba(234, 179, 8, 0.6); border-color: transparent;
+}
+
+.showcase-container {
+    display: flex;
+    align-items: center;
+    gap: 0px;
+    width: 100vw;
+    height: 100vh;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory; 
+    scrollbar-width: none;
+}
+
+.showcase-container::-webkit-scrollbar {
+    display: none;
+}
+
+/* -------------------------------------------
+   อัปเดตขนาดการ์ดและตำแหน่ง
+------------------------------------------- */
 .card-wrapper {
-    flex: 0 0 auto; 
-    width: 350px; 
-    height: 500px; 
+    flex: 0 0 auto;
+    width: 350px;
+    height: 500px;
     margin: 0 -30px; 
-    /* ปรับค่าตรงนี้ครับ ยิ่งเลขน้อย ยิ่งเลื่อนขึ้นไปข้างบน */
-    margin-top: 10vh; 
     
-    perspective: 1000px; 
-    scroll-snap-align: center; 
-    position: relative;
+    /* +++ ดันลงมาอีก! ปรับจาก 10vh เป็น 20vh (ถ้ายังทับอยู่อีก ให้ลองแก้เลข 20 เป็น 25 หรือ 30 ได้เลยครับ) +++ */
+    margin-top: 20vh; 
+    
+    scroll-snap-align: center;
     transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
-    filter: blur(8px) brightness(0.4); 
-    transform: scale(0.7); 
+    filter: blur(8px) brightness(0.4);
+    transform: scale(0.7);
     z-index: 1;
 }
 
+.card-wrapper.hidden {
+    display: none !important;
+}
+
+/* ปรับระยะขอบกลับเป็น 175px (ครึ่งนึงของ 350px) */
+.card-wrapper.first-visible {
+    margin-left: calc(50vw - 175px) !important;
+}
+.card-wrapper.last-visible {
+    margin-right: calc(50vw - 175px) !important;
+}
+
+.card-wrapper.active {
+    filter: blur(0px) brightness(1);
+    transform: scale(1.1); /* กลับมาซูม 110% เท่าเดิม */
+    z-index: 10;
+}
+
+.card {
+    width: 100%;
+    height: 100%;
+    /* ปรับให้กล่องมีสัดส่วนเดียวกับรูปภาพ */
+    aspect-ratio: 2 / 3; 
+}
+
+.card img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* เปลี่ยนจาก cover เป็น contain */
+    pointer-events: none;
+}
 /* ชั้นที่ทำ Tilt */
 .card-tilt { width: 100%; height: 100%; transform-style: preserve-3d; position: relative; }
 
@@ -55,65 +160,28 @@ body {
 .card-back { transform: rotateY(180deg); background: #1a1a24; }
 .card-front img, .card-back img { width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
 
-/* --- ปุ่ม Flip แยก (ลอยบนการ์ด) --- */
+
+/* ปุ่ม Flip */
 .flip-btn {
-display: block;
-    margin: 10px auto 0 auto; /* ดันลงมาใต้การ์ด 10px และจัดให้อยู่กลาง */
-    z-index: 50; /* ไม่ต้องห่วงเรื่อง z-index แล้ว เพราะอยู่นอกการ์ด */
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
-    border: 1px solid #4a5a6a;
-    padding: 8px 20px;
-    border-radius: 20px;
+    display: block;
+    margin: 15px auto 0 auto; /* จัดให้อยู่ใต้การ์ดและเว้นระยะ */
+    z-index: 50;
+    
+    /* สไตล์ที่เข้ากับธีม */
+    background: rgba(26, 26, 36, 0.8); /* สีพื้นหลังโปร่งใสแบบ Dark Theme */
+    color: #ffffff; /* สีตัวอักษรขาว */
+    border: 1px solid #4a5a6a; /* เส้นขอบที่เข้ากับปุ่ม Filter */
+    padding: 8px 25px; /* ขนาดปุ่มที่ดูดี */
+    border-radius: 30px; /* ขอบโค้งมน */
     cursor: pointer;
-    font-family: 'Cinzel', serif;
+    font-family: 'Cinzel', serif; /* ใช้ Font เดียวกับหัวข้อ */
+    font-size: 0.9rem;
+    letter-spacing: 2px;
     transition: 0.3s;
 }
 .flip-btn:hover { background: rgba(255, 255, 255, 0.3); }
 
-.card-wrapper.active { filter: blur(0px) brightness(1); transform: scale(1.1); z-index: 10; }
-.card-wrapper.first-visible { margin-left: calc(50vw - 175px) !important; }
-.card-wrapper.last-visible { margin-right: calc(50vw - 175px) !important; }
-
-@media screen and (max-width: 768px) {
-    /* 1. จัด Title ให้เข้าที่ */
-    .showcase-title { font-size: 1rem !important; top: 3% !important; letter-spacing: 2px !important; }
-    
-    /* 2. บังคับ Filter ให้ไม่เกินหน้าจอ และเรียงตัวสวย */
-    .category-filters { 
-        top: 10% !important; 
-        gap: 5px !important; 
-        width: 100% !important; /* บังคับกว้าง 100% */
-        padding: 0 5px !important;
-        box-sizing: border-box !important;
-        justify-content: center !important;
-        flex-wrap: wrap !important; /* ให้ขึ้นบรรทัดใหม่ถ้าปุ่มเยอะ */
-    }
-    
-    .filter-btn { 
-        padding: 4px 8px !important; 
-        font-size: 0.7rem !important; 
-    }
-
-    /* 3. ปรับขนาดการ์ดและแก้ปัญหา "เลื่อนไปซ้ายไม่สุด" */
-    .card-wrapper { 
-        width: 200px !important; 
-        height: 280px !important;
-        margin: 0 5px !important; /* ลด margin ซ้ายขวา เพื่อให้เลื่อนได้อิสระ */
-        margin-top: 18vh !important; 
-    }
-
-    /* ล้างระยะห่างแปลกๆ ที่ทำให้เลื่อนไม่สุด */
-    .card-wrapper.first-visible { margin-left: calc(50vw - 100px) !important; }
-    .card-wrapper.last-visible { margin-right: calc(50vw - 100px) !important; }
-
-    /* 4. ปุ่ม Flip */
-    .flip-btn {
-        margin-top: 8px !important;
-        padding: 4px 12px !important;
-        font-size: 0.7rem !important;
-    }
-}
+/* ปุ่มเพลง */
 .music-btn {
     position: fixed !important; 
     bottom: 30px !important; /* ขยับขึ้นมาอีกนิด */
@@ -127,4 +195,67 @@ display: block;
     border-radius: 50% !important;
     cursor: pointer !important; 
     display: flex; justify-content: center; align-items: center;
+}
+
+/* =========================================
+   รองรับหน้าจอมือถือ (ปรับกึ่งกลางแบบเป๊ะๆ)
+========================================= */
+@media screen and (max-width: 768px) {
+    /* 1. จัดหัวข้อให้กระชับขึ้น */
+    .showcase-title {
+        top: 2%;
+        font-size: 1.1rem;
+        letter-spacing: 4px;
+        width: 100%;
+        text-align: center;
+    }
+
+    /* 2. หมวดหมู่ย้ายลงมานิดเดียว */
+    .category-filters {
+        top: 10%;
+        width: 98vw;
+        flex-wrap: nowrap;
+        justify-content: center;
+        gap: 3px;
+    }
+
+    .filter-btn {
+        padding: 5px 6px;
+        font-size: 0.55rem;
+    }
+
+    /* 3. ปรับให้ Showcase Container จัดการกึ่งกลางแนวตั้งให้เอง */
+    .showcase-container {
+        display: flex;
+        align-items: center; /* ช่วยจัดกึ่งกลางแนวตั้งให้อัตโนมัติ */
+        height: 100vh;
+        overflow-x: auto;
+    }
+
+    .card-wrapper {
+        flex: 0 0 auto;
+        width: 250px;          /* ปรับขนาดให้พอดีจอขึ้น */
+        height: 357px;         
+        margin: 0 -10px;       
+        margin-top: 5vh;       /* ดันลงมานิดเดียวพอ */
+        scroll-snap-align: center;
+        transition: all 0.5s ease;
+        filter: blur(8px) brightness(0.4);
+        transform: scale(0.7);
+        z-index: 1;
+    }
+
+    /* ปรับสูตรดันใบแรกและใบสุดท้ายให้สัมพันธ์กับ 250px */
+    .card-wrapper.first-visible {
+        margin-left: calc(50vw - 125px) !important;
+    }
+    .card-wrapper.last-visible {
+        margin-right: calc(50vw - 125px) !important;
+    }
+
+    .card-wrapper.active {
+        filter: blur(0px) brightness(1);
+        transform: scale(1.05);
+        z-index: 10;
+    }
 }
