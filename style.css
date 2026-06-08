@@ -1,14 +1,9 @@
 /* --- ส่วนเริ่มต้น: Layout และพื้นหลัง --- */
 body {
-    width: 100%;
-    height: 100vh;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden; /* ป้องกันการเลื่อนซ้ายขวาเกินจำเป็น */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    min-height: 100vh; margin: 0; font-family: 'Arial', sans-serif; color: white;
+    overflow: hidden; background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('bg.png');
+    background-size: cover; background-position: center; background-attachment: fixed;
 }
 
 .showcase-title {
@@ -82,23 +77,20 @@ display: block;
 
 /* --- ปรับแต่งสำหรับมือถือเพิ่มเติม --- */
 @media screen and (max-width: 768px) {
-    .showcase-title { font-size: 1rem !important; top: 2% !important; }
+    .showcase-title { font-size: 0.9rem !important; top: 5% !important; letter-spacing: 2px !important; }
     
-    /* ปรับขนาดการ์ดและระยะขอบมือถือ */
+    .category-filters { top: 12% !important; gap: 4px !important; }
+    
     .card-wrapper { 
-        width: 250px; 
-        height: 357px; 
-        margin-top: 5vh; /* ให้การ์ดขยับขึ้นไปอีกนิดบนมือถือ เพื่อให้มีที่พอสำหรับปุ่ม Flip */
+        width: 220px !important; /* เล็กลงกว่าเดิมนิดนึง */
+        height: 310px !important;
+        margin-top: 15vh !important; /* ดันลงมานิดเพื่อให้ไม่ทับหมวดหมู่ */
     }
-    
-    .card-wrapper.first-visible { margin-left: calc(50vw - 125px) !important; }
-    .card-wrapper.last-visible { margin-right: calc(50vw - 125px) !important; }
 
-    /* ปรับขนาดปุ่ม Flip ให้พอดีกับหน้าจอมือถือ */
     .flip-btn {
-        padding: 6px 15px;
-        font-size: 0.8rem;
-        margin-top: 15px; /* เพิ่มระยะห่างจากตัวการ์ดเล็กน้อย */
+        margin-top: 10px !important;
+        padding: 5px 10px !important;
+        font-size: 0.7rem !important;
     }
 }
 .music-btn {
