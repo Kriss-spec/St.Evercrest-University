@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Character Showcase</title>
-    
+
     <link rel="icon" type="image/png" href="favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
@@ -35,7 +35,7 @@
         <div class="card-wrapper" data-category="epic"><div class="card" data-tilt data-tilt-glare data-tilt-max-glare="0.5"><img src="card8.jpg" alt="Card 8" onerror="this.onerror=null; this.src='argus_card.jpg';"></div></div>
         <div class="card-wrapper" data-category="epic"><div class="card" data-tilt data-tilt-glare data-tilt-max-glare="0.5"><img src="card9.jpg" alt="Card 9" onerror="this.onerror=null; this.src='argus_card.jpg';"></div></div>
         <div class="card-wrapper" data-category="epic"><div class="card" data-tilt data-tilt-glare data-tilt-max-glare="0.5"><img src="card10.jpg" alt="Card 10" onerror="this.onerror=null; this.src='argus_card.jpg';"></div></div>
-        
+
         <div class="card-wrapper" data-category="legendary"><div class="card" data-tilt data-tilt-glare data-tilt-max-glare="0.5"><img src="card11.jpg" alt="Card 11" onerror="this.onerror=null; this.src='argus_card.jpg';"></div></div>
             </div>
 
@@ -53,7 +53,7 @@
             let visibleWrappers = [];
             wrappers.forEach(wrapper => {
                 wrapper.classList.remove('first-visible', 'last-visible'); // เคลียร์คลาสระยะห่าง
-                
+
                 if (category === 'all' || wrapper.getAttribute('data-category') === category) {
                     wrapper.classList.remove('hidden');
                     visibleWrappers.push(wrapper);
@@ -70,7 +70,7 @@
 
             // เลื่อนกลับไปจุดเริ่มต้นเมื่อเปลี่ยนหมวดหมู่
             container.scrollTo({ left: 0, behavior: 'smooth' });
-            setTimeout(updateCenterCard, 100);
+            setTimeout(updateCenterCard, 200);
         }
 
         // กดปุ่มเพื่อเปลี่ยนหมวดหมู่
@@ -101,7 +101,7 @@
             const centerPoint = window.innerWidth / 2;
             let minDistance = Infinity;
             let centerWrapper = null;
-            
+
             const visibleWrappers = document.querySelectorAll('.card-wrapper:not(.hidden)');
 
             visibleWrappers.forEach(wrapper => {
@@ -123,9 +123,10 @@
 
         container.addEventListener('scroll', updateCenterCard);
         window.addEventListener('resize', updateCenterCard);
-        
+
         // รันครั้งแรกเมื่อเปิดเว็บ
         applyFilter('all');
+    </script>
     <audio id="bgMusic" loop>
         <source src="music.mp3" type="audio/mpeg">
     </audio>
@@ -134,9 +135,8 @@
     <script>
         const music = document.getElementById("bgMusic");
         const musicBtn = document.getElementById("musicBtn");
-
         // ปรับความดังเป็น 50%
-        music.volume = 0.1;
+        music.volume = 0.5;
 
         // ฟังก์ชันเริ่มเล่น
         function tryPlay() {
@@ -152,9 +152,7 @@
         // เล่นทันทีที่ผู้ใช้คลิกตรงไหนก็ได้ของเว็บ
         document.body.addEventListener('click', tryPlay, { once: true });
 
-        // ปุ่มเปิด/ปิด
-        musicBtn.addEventListener('click', (e) => {
-            e.stopPropagation(); // ป้องกันไม่ให้ไป trigger event ของ body
+        musicBtn.addEventListener('click', () => {
             if (music.paused) {
                 music.play();
                 musicBtn.textContent = "🎵";
@@ -164,5 +162,9 @@
             }
         });
     </script>
+    <button id="musicBtn" class="music-btn">🎵</button>
+    <audio id="bgMusic" loop>
+        <source src="music.mp3" type="audio/mpeg">
+    </audio>
 </body>
 </html>
