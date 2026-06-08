@@ -211,6 +211,7 @@ body {
         transform: scale(1.05);
         z-index: 10;
     }
+}
     .music-btn {
     position: fixed !important;
     bottom: 20px !important;
@@ -234,6 +235,4 @@ body {
     
     .music-btn:hover { 
         background: rgba(255, 255, 255, 0.2) !important; 
-}
-
 }
