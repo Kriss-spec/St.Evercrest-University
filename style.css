@@ -1,36 +1,18 @@
 /* --- ส่วนเริ่มต้น: Layout และพื้นหลัง --- */
 body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
-    font-family: 'Arial', sans-serif;
-    color: white;
-    overflow: hidden; 
-    background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('bg.png');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    min-height: 100vh; margin: 0; font-family: 'Arial', sans-serif; color: white;
+    overflow: hidden; background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('bg.png');
+    background-size: cover; background-position: center; background-attachment: fixed;
 }
 
 .showcase-title {
-    position: absolute;
-    top: 3%;
-    font-family: 'Cinzel', serif;
-    font-size: 2.2rem;
-    letter-spacing: 12px;
-    font-weight: 600;
-    z-index: 100;
-    margin: 0;
+    position: absolute; top: 3%; font-family: 'Cinzel', serif; font-size: 2.2rem;
+    letter-spacing: 12px; font-weight: 600; z-index: 100; margin: 0;
     background: linear-gradient(to right, #7a8c9e, #ffffff, #8ca3be, #7a8c9e);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 0 15px rgba(140, 163, 190, 0.6));
-    animation: shine 4s linear infinite;
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 15px rgba(140, 163, 190, 0.6)); animation: shine 4s linear infinite;
 }
-
 @keyframes shine { to { background-position: 200% center; } }
 
 /* --- ส่วนของปุ่ม Filter --- */
@@ -38,29 +20,62 @@ body {
 .filter-btn { background: rgba(26, 26, 36, 0.6); border: 1px solid #4a5a6a; color: #a3a3c2; padding: 8px 25px; border-radius: 30px; cursor: pointer; }
 .filter-btn.active { background: #ffffff; color: #000; }
 
-/* --- ส่วนการ์ด (Flip & Tilt) --- */
+/* --- ส่วนการ์ด (Structure: Wrapper > Tilt > Inner) --- */
 .showcase-container { display: flex; align-items: center; width: 100vw; height: 100vh; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
 .showcase-container::-webkit-scrollbar { display: none; }
 
 .card-wrapper {
-    flex: 0 0 auto; width: 350px; height: 500px; margin: 0 -30px; margin-top: 20vh;
-    perspective: 1000px; scroll-snap-align: center;
+    flex: 0 0 auto; 
+    width: 350px; 
+    height: 500px; 
+    margin: 0 -30px; 
+    /* ปรับค่าตรงนี้ครับ ยิ่งเลขน้อย ยิ่งเลื่อนขึ้นไปข้างบน */
+    margin-top: 10vh; 
+    
+    perspective: 1000px; 
+    scroll-snap-align: center; 
+    position: relative;
     transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
-    filter: blur(8px) brightness(0.4); transform: scale(0.7); z-index: 1;
+    filter: blur(8px) brightness(0.4); 
+    transform: scale(0.7); 
+    z-index: 1;
 }
 
-.card-inner { width: 100%; height: 100%; position: relative; transition: transform 0.6s; transform-style: preserve-3d; cursor: pointer; }
+/* ชั้นที่ทำ Tilt */
+.card-tilt { width: 100%; height: 100%; transform-style: preserve-3d; position: relative; }
+
+/* ชั้นที่ทำ Flip */
+.card-inner { 
+    width: 100%; height: 100%; position: relative; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); 
+    transform-style: preserve-3d; cursor: pointer; 
+}
 .card-wrapper.flipped .card-inner { transform: rotateY(180deg); }
 
 .card-front, .card-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 15px; overflow: hidden; box-shadow: 0 30px 60px rgba(0, 0, 0, 0.9); }
 .card-back { transform: rotateY(180deg); background: #1a1a24; }
 .card-front img, .card-back img { width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
 
+/* --- ปุ่ม Flip แยก (ลอยบนการ์ด) --- */
+.flip-btn {
+display: block;
+    margin: 10px auto 0 auto; /* ดันลงมาใต้การ์ด 10px และจัดให้อยู่กลาง */
+    z-index: 50; /* ไม่ต้องห่วงเรื่อง z-index แล้ว เพราะอยู่นอกการ์ด */
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid #4a5a6a;
+    padding: 8px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-family: 'Cinzel', serif;
+    transition: 0.3s;
+}
+.flip-btn:hover { background: rgba(255, 255, 255, 0.3); }
+
 .card-wrapper.active { filter: blur(0px) brightness(1); transform: scale(1.1); z-index: 10; }
 .card-wrapper.first-visible { margin-left: calc(50vw - 175px) !important; }
 .card-wrapper.last-visible { margin-right: calc(50vw - 175px) !important; }
 
-/* --- ส่วนปุ่มเพลงและ Mobile Responsive --- */
+/* --- Mobile Responsive --- */
 @media screen and (max-width: 768px) {
     .showcase-title { font-size: 1.1rem; }
     .card-wrapper { width: 250px; height: 357px; }
