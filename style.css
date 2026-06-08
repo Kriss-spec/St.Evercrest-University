@@ -75,21 +75,42 @@ display: block;
 .card-wrapper.first-visible { margin-left: calc(50vw - 175px) !important; }
 .card-wrapper.last-visible { margin-right: calc(50vw - 175px) !important; }
 
-/* --- ปรับแต่งสำหรับมือถือเพิ่มเติม --- */
 @media screen and (max-width: 768px) {
-    .showcase-title { font-size: 0.9rem !important; top: 5% !important; letter-spacing: 2px !important; }
+    /* 1. จัด Title ให้เข้าที่ */
+    .showcase-title { font-size: 1rem !important; top: 3% !important; letter-spacing: 2px !important; }
     
-    .category-filters { top: 12% !important; gap: 4px !important; }
+    /* 2. บังคับ Filter ให้ไม่เกินหน้าจอ และเรียงตัวสวย */
+    .category-filters { 
+        top: 10% !important; 
+        gap: 5px !important; 
+        width: 100% !important; /* บังคับกว้าง 100% */
+        padding: 0 5px !important;
+        box-sizing: border-box !important;
+        justify-content: center !important;
+        flex-wrap: wrap !important; /* ให้ขึ้นบรรทัดใหม่ถ้าปุ่มเยอะ */
+    }
     
-    .card-wrapper { 
-        width: 220px !important; /* เล็กลงกว่าเดิมนิดนึง */
-        height: 310px !important;
-        margin-top: 15vh !important; /* ดันลงมานิดเพื่อให้ไม่ทับหมวดหมู่ */
+    .filter-btn { 
+        padding: 4px 8px !important; 
+        font-size: 0.7rem !important; 
     }
 
+    /* 3. ปรับขนาดการ์ดและแก้ปัญหา "เลื่อนไปซ้ายไม่สุด" */
+    .card-wrapper { 
+        width: 200px !important; 
+        height: 280px !important;
+        margin: 0 5px !important; /* ลด margin ซ้ายขวา เพื่อให้เลื่อนได้อิสระ */
+        margin-top: 18vh !important; 
+    }
+
+    /* ล้างระยะห่างแปลกๆ ที่ทำให้เลื่อนไม่สุด */
+    .card-wrapper.first-visible { margin-left: calc(50vw - 100px) !important; }
+    .card-wrapper.last-visible { margin-right: calc(50vw - 100px) !important; }
+
+    /* 4. ปุ่ม Flip */
     .flip-btn {
-        margin-top: 10px !important;
-        padding: 5px 10px !important;
+        margin-top: 8px !important;
+        padding: 4px 12px !important;
         font-size: 0.7rem !important;
     }
 }
