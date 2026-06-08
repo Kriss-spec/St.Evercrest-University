@@ -127,32 +127,28 @@
         // รันครั้งแรกเมื่อเปิดเว็บ
         applyFilter('all');
     </script>
+    <script>
+        <button id="musicBtn" class="music-btn">🎵</button>
     <audio id="bgMusic" loop>
         <source src="music.mp3" type="audio/mpeg">
     </audio>
-    <button id="musicBtn" class="music-btn">🎵</button>
 
     <script>
         const music = document.getElementById("bgMusic");
         const musicBtn = document.getElementById("musicBtn");
-        // ปรับความดังเป็น 50%
-        music.volume = 0.1;
+        music.volume = 0.1; 
 
-        // ฟังก์ชันเริ่มเล่น
         function tryPlay() {
             music.play().then(() => {
-                // ถ้าเล่นสำเร็จ ให้เอา Event Listener ออก
                 document.body.removeEventListener('click', tryPlay);
                 musicBtn.textContent = "🎵";
-            }).catch(e => {
-                console.log("รอการโต้ตอบจากผู้ใช้");
-            });
+            }).catch(e => console.log("รอการคลิก"));
         }
 
-        // เล่นทันทีที่ผู้ใช้คลิกตรงไหนก็ได้ของเว็บ
         document.body.addEventListener('click', tryPlay, { once: true });
 
-        musicBtn.addEventListener('click', () => {
+        musicBtn.addEventListener('click', (e) => {
+            e.stopPropagation(); 
             if (music.paused) {
                 music.play();
                 musicBtn.textContent = "🎵";
@@ -162,9 +158,7 @@
             }
         });
     </script>
-    <button id="musicBtn" class="music-btn">🎵</button>
-    <audio id="bgMusic" loop>
-        <source src="music.mp3" type="audio/mpeg">
-    </audio>
+</body>
+</html>
 </body>
 </html>
