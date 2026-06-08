@@ -4,13 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Character Showcase</title>
+    
     <link rel="icon" type="image/png" href="favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h2 class="showcase-title">COLLECTION SHOWCASE</h2>
+    <h2 class="showcase-title" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.3">COLLECTION SHOWCASE</h2>
 
+    <!-- ระบบปุ่มกรองหมวดหมู่ -->
     <div class="category-filters">
         <button class="filter-btn active" data-filter="all">ALL</button>
         <button class="filter-btn common-btn" data-filter="common">COMMON</button>
@@ -20,69 +22,38 @@
     </div>
 
     <div class="showcase-container">
-        <div class="card-wrapper" data-category="common"><div class="card" data-tilt data-tilt-glare data-tilt-max-glare="0.5"><img src="card1.jpg" onerror="this.src='argus_card.jpg';"></div></div>
-        <div class="card-wrapper" data-category="common"><div class="card" data-tilt data-tilt-glare data-tilt-max-glare="0.5"><img src="card2.jpg" onerror="this.src='argus_card.jpg';"></div></div>
-        <div class="card-wrapper" data-category="rare"><div class="card" data-tilt data-tilt-glare data-tilt-max-glare="0.5"><img src="card3.jpg" onerror="this.src='argus_card.jpg';"></div></div>
-        <div class="card-wrapper" data-category="rare"><div class="card" data-tilt data-tilt-glare data-tilt-max-glare="0.5"><img src="card4.jpg" onerror="this.src='argus_card.jpg';"></div></div>
-        <div class="card-wrapper" data-category="rare"><div class="card" data-tilt data-tilt-glare data-tilt-max-glare="0.5"><img src="card5.jpg" onerror="this.src='argus_card.jpg';"></div></div>
-        <div class="card-wrapper" data-category="rare"><div class="card" data-tilt data-tilt-glare data-tilt-max-glare="0.5"><img src="card6.jpg" onerror="this.src='argus_card.jpg';"></div></div>
-        <div class="card-wrapper" data-category="epic"><div class="card" data-tilt data-tilt-glare data-tilt-max-glare="0.5"><img src="card7.jpg" onerror="this.src='argus_card.jpg';"></div></div>
-        <div class="card-wrapper" data-category="epic"><div class="card" data-tilt data-tilt-glare data-tilt-max-glare="0.5"><img src="card8.jpg" onerror="this.src='argus_card.jpg';"></div></div>
-        <div class="card-wrapper" data-category="epic"><div class="card" data-tilt data-tilt-glare data-tilt-max-glare="0.5"><img src="card9.jpg" onerror="this.src='argus_card.jpg';"></div></div>
-        <div class="card-wrapper" data-category="epic"><div class="card" data-tilt data-tilt-glare data-tilt-max-glare="0.5"><img src="card10.jpg" onerror="this.src='argus_card.jpg';"></div></div>
-        <div class="card-wrapper" data-category="legendary"><div class="card" data-tilt data-tilt-glare data-tilt-max-glare="0.5"><img src="card11.jpg" onerror="this.src='argus_card.jpg';"></div></div>
-    </div>
+        <!-- ใส่ data-category เพื่อแยกหมวดหมู่ให้การ์ดแต่ละใบ -->
+        <div class="card-wrapper" data-category="common"><div class="card" data-tilt data-tilt-glare data-tilt-max-glare="0.5"><img src="card1.jpg" alt="Card 1" onerror="this.onerror=null; this.src='argus_card.jpg';"></div></div>
+        <div class="card-wrapper" data-category="common"><div class="card" data-tilt data-tilt-glare data-tilt-max-glare="0.5"><img src="card2.jpg" alt="Card 2" onerror="this.onerror=null; this.src='argus_card.jpg';"></div></div>
 
-    <button id="musicBtn" class="music-btn">🎵</button>
-    <audio id="bgMusic" loop>
-        <source src="music.mp3" type="audio/mpeg">
-    </audio>
+        <div class="card-wrapper" data-category="rare"><div class="card" data-tilt data-tilt-glare data-tilt-max-glare="0.5"><img src="card3.jpg" alt="Card 3" onerror="this.onerror=null; this.src='argus_card.jpg';"></div></div>
+        <div class="card-wrapper" data-category="rare"><div class="card" data-tilt data-tilt-glare data-tilt-max-glare="0.5"><img src="card4.jpg" alt="Card 4" onerror="this.onerror=null; this.src='argus_card.jpg';"></div></div>
+        <div class="card-wrapper" data-category="rare"><div class="card" data-tilt data-tilt-glare data-tilt-max-glare="0.5"><img src="card5.jpg" alt="Card 5" onerror="this.onerror=null; this.src='argus_card.jpg';"></div></div>
+        <div class="card-wrapper" data-category="rare"><div class="card" data-tilt data-tilt-glare data-tilt-max-glare="0.5"><img src="card6.jpg" alt="Card 6" onerror="this.onerror=null; this.src='argus_card.jpg';"></div></div>
+
+        <div class="card-wrapper" data-category="epic"><div class="card" data-tilt data-tilt-glare data-tilt-max-glare="0.5"><img src="card7.jpg" alt="Card 7" onerror="this.onerror=null; this.src='argus_card.jpg';"></div></div>        
+        <div class="card-wrapper" data-category="epic"><div class="card" data-tilt data-tilt-glare data-tilt-max-glare="0.5"><img src="card8.jpg" alt="Card 8" onerror="this.onerror=null; this.src='argus_card.jpg';"></div></div>
+        <div class="card-wrapper" data-category="epic"><div class="card" data-tilt data-tilt-glare data-tilt-max-glare="0.5"><img src="card9.jpg" alt="Card 9" onerror="this.onerror=null; this.src='argus_card.jpg';"></div></div>
+        <div class="card-wrapper" data-category="epic"><div class="card" data-tilt data-tilt-glare data-tilt-max-glare="0.5"><img src="card10.jpg" alt="Card 10" onerror="this.onerror=null; this.src='argus_card.jpg';"></div></div>
+        
+        <div class="card-wrapper" data-category="legendary"><div class="card" data-tilt data-tilt-glare data-tilt-max-glare="0.5"><img src="card11.jpg" alt="Card 11" onerror="this.onerror=null; this.src='argus_card.jpg';"></div></div>
+            </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
     <script>
-        // ระบบ Tilt
         VanillaTilt.init(document.querySelectorAll(".card"), { max: 20, speed: 400, perspective: 1000 });
-        
-        const music = document.getElementById("bgMusic");
-        const musicBtn = document.getElementById("musicBtn");
-        
-        // ตั้งความดัง 50%
-        music.volume = 0.1;
+        VanillaTilt.init(document.querySelector(".showcase-title"));
 
-        // ฟังก์ชันเริ่มเล่น
-        function tryPlay() {
-            music.play().then(() => {
-                // ถ้าเล่นสำเร็จ ให้เอา Event Listener ออก
-                document.body.removeEventListener('click', tryPlay);
-                musicBtn.textContent = "🎵";
-            }).catch(e => {
-                console.log("รอการโต้ตอบจากผู้ใช้");
-            });
-        }
-
-        // เล่นทันทีที่ผู้ใช้คลิกตรงไหนก็ได้ของเว็บ
-        document.body.addEventListener('click', tryPlay, { once: true });
-
-        // ปุ่มเปิด/ปิด
-        musicBtn.addEventListener('click', (e) => {
-            e.stopPropagation(); // ป้องกันไม่ให้ไป trigger event ของ body
-            if (music.paused) {
-                music.play();
-                musicBtn.textContent = "🎵";
-            } else {
-                music.pause();
-                musicBtn.textContent = "🔇";
-            }
-        });
-        // ระบบกรองการ์ด
         const container = document.querySelector('.showcase-container');
         const wrappers = document.querySelectorAll('.card-wrapper');
         const filterBtns = document.querySelectorAll('.filter-btn');
 
+        // ฟังก์ชันกรองการ์ดตามหมวดหมู่
         function applyFilter(category) {
             let visibleWrappers = [];
             wrappers.forEach(wrapper => {
-                wrapper.classList.remove('first-visible', 'last-visible');
+                wrapper.classList.remove('first-visible', 'last-visible'); // เคลียร์คลาสระยะห่าง
+                
                 if (category === 'all' || wrapper.getAttribute('data-category') === category) {
                     wrapper.classList.remove('hidden');
                     visibleWrappers.push(wrapper);
@@ -90,14 +61,19 @@
                     wrapper.classList.add('hidden');
                 }
             });
+
+            // กำหนดใบแรกและใบสุดท้ายของหมวดนั้นๆ ให้มีระยะดันตรงกลาง
             if (visibleWrappers.length > 0) {
                 visibleWrappers[0].classList.add('first-visible');
                 visibleWrappers[visibleWrappers.length - 1].classList.add('last-visible');
             }
+
+            // เลื่อนกลับไปจุดเริ่มต้นเมื่อเปลี่ยนหมวดหมู่
             container.scrollTo({ left: 0, behavior: 'smooth' });
-            setTimeout(updateCenterCard, 200);
+            setTimeout(updateCenterCard, 100);
         }
 
+        // กดปุ่มเพื่อเปลี่ยนหมวดหมู่
         filterBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 filterBtns.forEach(b => b.classList.remove('active'));
@@ -106,21 +82,49 @@
             });
         });
 
+        // จัดการเลื่อนเมาส์
+        container.addEventListener('wheel', (e) => {
+            if (e.deltaY !== 0) {
+                e.preventDefault();
+                container.scrollBy({ left: e.deltaY * 2, behavior: 'auto' });
+            }
+        });
+
+        wrappers.forEach(wrapper => {
+            wrapper.addEventListener('click', () => {
+                wrapper.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+            });
+        });
+
+        // ตรวจสอบใบที่อยู่ตรงกลาง (นับเฉพาะใบที่แสดงผลอยู่)
         function updateCenterCard() {
             const centerPoint = window.innerWidth / 2;
             let minDistance = Infinity;
             let centerWrapper = null;
-            document.querySelectorAll('.card-wrapper:not(.hidden)').forEach(wrapper => {
+            
+            const visibleWrappers = document.querySelectorAll('.card-wrapper:not(.hidden)');
+
+            visibleWrappers.forEach(wrapper => {
                 const rect = wrapper.getBoundingClientRect();
                 const wrapperCenter = rect.left + (rect.width / 2);
                 const distance = Math.abs(centerPoint - wrapperCenter);
-                if (distance < minDistance) { minDistance = distance; centerWrapper = wrapper; }
+
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    centerWrapper = wrapper;
+                }
             });
+
             wrappers.forEach(w => w.classList.remove('active'));
-            if (centerWrapper) centerWrapper.classList.add('active');
+            if (centerWrapper) {
+                centerWrapper.classList.add('active');
+            }
         }
 
         container.addEventListener('scroll', updateCenterCard);
+        window.addEventListener('resize', updateCenterCard);
+        
+        // รันครั้งแรกเมื่อเปิดเว็บ
         applyFilter('all');
     </script>
 </body>
