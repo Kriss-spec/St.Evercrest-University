@@ -212,15 +212,24 @@ body {
         z-index: 10;
     }
 }
+/* ปุ่มเพลง (วางไว้ล่างสุดของไฟล์ CSS) */
 .music-btn {
-    background: rgba(26, 26, 36, 0.6);
-    border: 1px solid #4a5a6a;
-    color: white;
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    cursor: pointer;
-    backdrop-filter: blur(5px);
-    transition: all 0.3s ease;
-    font-size: 1.2rem;
+    position: fixed !important;
+    bottom: 20px !important;
+    left: 20px !important;
+    z-index: 9999 !important; /* เพิ่มค่าให้สูงที่สุด */
+    background: rgba(26, 26, 36, 0.8) !important;
+    border: 1px solid #4a5a6a !important;
+    color: white !important;
+    width: 45px !important;
+    height: 45px !important;
+    border-radius: 50% !important;
+    cursor: pointer !important;
+    backdrop-filter: blur(5px) !important;
+    transition: all 0.3s ease !important;
+    font-size: 1.2rem !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
 }
+.music-btn:hover { background: rgba(255, 255, 255, 0.2) !important; }
