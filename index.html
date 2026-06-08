@@ -4,15 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Character Showcase</title>
-
     <link rel="icon" type="image/png" href="favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h2 class="showcase-title" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.3">COLLECTION SHOWCASE</h2>
+    <h2 class="showcase-title">COLLECTION SHOWCASE</h2>
 
-    <!-- ระบบปุ่มกรองหมวดหมู่ -->
     <div class="category-filters">
         <button class="filter-btn active" data-filter="all">ALL</button>
         <button class="filter-btn common-btn" data-filter="common">COMMON</button>
@@ -22,23 +20,24 @@
     </div>
 
     <div class="showcase-container">
-        <!-- ใส่ data-category เพื่อแยกหมวดหมู่ให้การ์ดแต่ละใบ -->
-        <div class="card-wrapper" data-category="common"><div class="card-inner" data-tilt data-tilt-glare data-tilt-max-glare="0.5"><div class="card-front"><img src="card1.jpg" onerror="this.src='argus_card.jpg';"></div><div class="card-back"><img src="card1_back.jpg" onerror="this.src='argus_card.jpg';"></div></div></div>
-        <div class="card-wrapper" data-category="common"><div class="card-inner" data-tilt data-tilt-glare data-tilt-max-glare="0.5"><div class="card-front"><img src="card2.jpg" onerror="this.src='argus_card.jpg';"></div><div class="card-back"><img src="card2_back.jpg" onerror="this.src='argus_card.jpg';"></div></div></div>
+        <!-- ตัวอย่างโครงสร้างการ์ดที่แก้ไขแล้ว (ทำซ้ำรูปแบบนี้ทั้ง 11 ใบ) -->
+<div class="card-wrapper" data-category="common"><div class="card-tilt" data-tilt data-tilt-glare data-tilt-max-glare="0.5"><div class="card-inner"><div class="card-front"><img src="card1.jpg" onerror="this.src='argus_card.jpg';"></div><div class="card-back"><img src="card1_back.jpg" onerror="this.src='argus_card.jpg';"></div></div></div><button class="flip-btn" onclick="flipCard(this)">FLIP</button></div>
+        <div class="card-wrapper" data-category="common"><div class="card-tilt" data-tilt data-tilt-glare data-tilt-max-glare="0.5"><div class="card-inner"><div class="card-front"><img src="card2.jpg" onerror="this.src='argus_card.jpg';"></div><div class="card-back"><img src="card2_back.jpg" onerror="this.src='argus_card.jpg';"></div></div></div><button class="flip-btn" onclick="flipCard(this)">FLIP</button></div>
 
-        <div class="card-wrapper" data-category="rare"><div class="card-inner" data-tilt data-tilt-glare data-tilt-max-glare="0.5"><div class="card-front"><img src="card3.jpg" onerror="this.src='argus_card.jpg';"></div><div class="card-back"><img src="card3_back.jpg" onerror="this.src='argus_card.jpg';"></div></div></div>
-        <div class="card-wrapper" data-category="rare"><div class="card-inner" data-tilt data-tilt-glare data-tilt-max-glare="0.5"><div class="card-front"><img src="card4.jpg" onerror="this.src='argus_card.jpg';"></div><div class="card-back"><img src="card4_back.jpg" onerror="this.src='argus_card.jpg';"></div></div></div>
-        <div class="card-wrapper" data-category="rare"><div class="card-inner" data-tilt data-tilt-glare data-tilt-max-glare="0.5"><div class="card-front"><img src="card5.jpg" onerror="this.src='argus_card.jpg';"></div><div class="card-back"><img src="card5_back.jpg" onerror="this.src='argus_card.jpg';"></div></div></div>
-        <div class="card-wrapper" data-category="rare"><div class="card-inner" data-tilt data-tilt-glare data-tilt-max-glare="0.5"><div class="card-front"><img src="card6.jpg" onerror="this.src='argus_card.jpg';"></div><div class="card-back"><img src="card6_back.jpg" onerror="this.src='argus_card.jpg';"></div></div></div>
+        <div class="card-wrapper" data-category="rare"><div class="card-tilt" data-tilt data-tilt-glare data-tilt-max-glare="0.5"><div class="card-inner"><div class="card-front"><img src="card3.jpg" onerror="this.src='argus_card.jpg';"></div><div class="card-back"><img src="card3_back.jpg" onerror="this.src='argus_card.jpg';"></div></div></div><button class="flip-btn" onclick="flipCard(this)">FLIP</button></div>
+        <div class="card-wrapper" data-category="rare"><div class="card-tilt" data-tilt data-tilt-glare data-tilt-max-glare="0.5"><div class="card-inner"><div class="card-front"><img src="card4.jpg" onerror="this.src='argus_card.jpg';"></div><div class="card-back"><img src="card4_back.jpg" onerror="this.src='argus_card.jpg';"></div></div></div><button class="flip-btn" onclick="flipCard(this)">FLIP</button></div>
+        <div class="card-wrapper" data-category="rare"><div class="card-tilt" data-tilt data-tilt-glare data-tilt-max-glare="0.5"><div class="card-inner"><div class="card-front"><img src="card5.jpg" onerror="this.src='argus_card.jpg';"></div><div class="card-back"><img src="card5_back.jpg" onerror="this.src='argus_card.jpg';"></div></div></div><button class="flip-btn" onclick="flipCard(this)">FLIP</button></div>
+        <div class="card-wrapper" data-category="rare"><div class="card-tilt" data-tilt data-tilt-glare data-tilt-max-glare="0.5"><div class="card-inner"><div class="card-front"><img src="card6.jpg" onerror="this.src='argus_card.jpg';"></div><div class="card-back"><img src="card6_back.jpg" onerror="this.src='argus_card.jpg';"></div></div></div><button class="flip-btn" onclick="flipCard(this)">FLIP</button></div>
 
-        <div class="card-wrapper" data-category="epic"><div class="card-inner" data-tilt data-tilt-glare data-tilt-max-glare="0.5"><div class="card-front"><img src="card7.jpg" onerror="this.src='argus_card.jpg';"></div><div class="card-back"><img src="card7_back.jpg" onerror="this.src='argus_card.jpg';"></div></div></div>
-        <div class="card-wrapper" data-category="epic"><div class="card-inner" data-tilt data-tilt-glare data-tilt-max-glare="0.5"><div class="card-front"><img src="card8.jpg" onerror="this.src='argus_card.jpg';"></div><div class="card-back"><img src="card8_back.jpg" onerror="this.src='argus_card.jpg';"></div></div></div>
-        <div class="card-wrapper" data-category="epic"><div class="card-inner" data-tilt data-tilt-glare data-tilt-max-glare="0.5"><div class="card-front"><img src="card9.jpg" onerror="this.src='argus_card.jpg';"></div><div class="card-back"><img src="card9_back.jpg" onerror="this.src='argus_card.jpg';"></div></div></div>
-        <div class="card-wrapper" data-category="epic"><div class="card-inner" data-tilt data-tilt-glare data-tilt-max-glare="0.5"><div class="card-front"><img src="card10.jpg" onerror="this.src='argus_card.jpg';"></div><div class="card-back"><img src="card10_back.jpg" onerror="this.src='argus_card.jpg';"></div></div></div>
+        <div class="card-wrapper" data-category="epic"><div class="card-tilt" data-tilt data-tilt-glare data-tilt-max-glare="0.5"><div class="card-inner"><div class="card-front"><img src="card7.jpg" onerror="this.src='argus_card.jpg';"></div><div class="card-back"><img src="card7_back.jpg" onerror="this.src='argus_card.jpg';"></div></div></div><button class="flip-btn" onclick="flipCard(this)">FLIP</button></div>
+        <div class="card-wrapper" data-category="epic"><div class="card-tilt" data-tilt data-tilt-glare data-tilt-max-glare="0.5"><div class="card-inner"><div class="card-front"><img src="card8.jpg" onerror="this.src='argus_card.jpg';"></div><div class="card-back"><img src="card8_back.jpg" onerror="this.src='argus_card.jpg';"></div></div></div><button class="flip-btn" onclick="flipCard(this)">FLIP</button></div>
+        <div class="card-wrapper" data-category="epic"><div class="card-tilt" data-tilt data-tilt-glare data-tilt-max-glare="0.5"><div class="card-inner"><div class="card-front"><img src="card9.jpg" onerror="this.src='argus_card.jpg';"></div><div class="card-back"><img src="card9_back.jpg" onerror="this.src='argus_card.jpg';"></div></div></div><button class="flip-btn" onclick="flipCard(this)">FLIP</button></div>
+        <div class="card-wrapper" data-category="epic"><div class="card-tilt" data-tilt data-tilt-glare data-tilt-max-glare="0.5"><div class="card-inner"><div class="card-front"><img src="card10.jpg" onerror="this.src='argus_card.jpg';"></div><div class="card-back"><img src="card10_back.jpg" onerror="this.src='argus_card.jpg';"></div></div></div><button class="flip-btn" onclick="flipCard(this)">FLIP</button></div>
 
-        <div class="card-wrapper" data-category="legendary"><div class="card-inner" data-tilt data-tilt-glare data-tilt-max-glare="0.5"><div class="card-front"><img src="card11.jpg" onerror="this.src='argus_card.jpg';"></div><div class="card-back"><img src="card11_back.jpg" onerror="this.src='argus_card.jpg';"></div></div></div>
+        <div class="card-wrapper" data-category="legendary"><div class="card-tilt" data-tilt data-tilt-glare data-tilt-max-glare="0.5"><div class="card-inner"><div class="card-front"><img src="card11.jpg" onerror="this.src='argus_card.jpg';"></div><div class="card-back"><img src="card11_back.jpg" onerror="this.src='argus_card.jpg';"></div></div></div><button class="flip-btn" onclick="flipCard(this)">FLIP</button></div>
+        <!-- ใบที่ 2-11 ให้เพิ่ม <button class="flip-btn" onclick="flipCard(this)">FLIP</button> ไว้เหนือ card-inner ด้วยครับ -->
     </div>
-    <!-- ปุ่มเพลงและ Audio (มีแค่ชุดเดียว) -->
+
     <button id="musicBtn" class="music-btn">🎵</button>
     <audio id="bgMusic" loop>
         <source src="music.mp3" type="audio/mpeg">
@@ -46,50 +45,45 @@
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
     <script>
-        // 1. แก้ไขให้เรียก .card-inner แทน .card
-        VanillaTilt.init(document.querySelectorAll(".card-inner"), { max: 15, speed: 400, perspective: 1000 });
-
-        // 2. เพิ่มคำสั่งนี้เข้าไป เพื่อให้การ์ดพลิกได้เมื่อคลิก
-        document.querySelectorAll('.card-inner').forEach(card => {
-            card.addEventListener('click', function() {
-                this.parentElement.classList.toggle('flipped');
-            });
+        // 1. สั่ง VanillaTilt ทำงานที่ชั้น .card-tilt เท่านั้น
+        VanillaTilt.init(document.querySelectorAll(".card-tilt"), { 
+            max: 15, 
+            speed: 400, 
+            perspective: 1000 
         });
-        // 2. Music Logic
+
+        // 2. ฟังก์ชัน Flip (สั่งงานแค่ตัว .card-inner ที่อยู่ใน .card-wrapper)
+        function flipCard(btn) {
+            // หาตัว wrapper ของการ์ดใบที่กด แล้วสั่ง flipped
+            const wrapper = btn.closest('.card-wrapper');
+            wrapper.classList.toggle('flipped');
+        }
+
+        // 3. Music Logic
         const music = document.getElementById("bgMusic");
         const musicBtn = document.getElementById("musicBtn");
         music.volume = 0.1;
-
         function tryPlay() {
             music.play().then(() => {
                 document.body.removeEventListener('click', tryPlay);
-                musicBtn.textContent = "🎵";
             }).catch(e => console.log("รอการโต้ตอบ"));
         }
         document.body.addEventListener('click', tryPlay, { once: true });
-
         musicBtn.addEventListener('click', (e) => {
-            e.stopPropagation(); // ป้องกันไม่ให้ Event กระจายไปตัวอื่น
-            if (music.paused) {
-                music.play();
-                musicBtn.textContent = "🎵";
-            } else {
-                music.pause();
-                musicBtn.textContent = "🔇";
-            }
+            e.stopPropagation();
+            if (music.paused) { music.play(); musicBtn.textContent = "🎵"; }
+            else { music.pause(); musicBtn.textContent = "🔇"; }
         });
 
-        // 3. Showcase & Filter Logic
+        // 4. Showcase & Filter Logic
         const container = document.querySelector('.showcase-container');
         const wrappers = document.querySelectorAll('.card-wrapper');
         const filterBtns = document.querySelectorAll('.filter-btn');
 
-        // ฟังก์ชันกรองการ์ดตามหมวดหมู่
         function applyFilter(category) {
             let visibleWrappers = [];
             wrappers.forEach(wrapper => {
-                wrapper.classList.remove('first-visible', 'last-visible'); // เคลียร์คลาสระยะห่าง
-
+                wrapper.classList.remove('first-visible', 'last-visible');
                 if (category === 'all' || wrapper.getAttribute('data-category') === category) {
                     wrapper.classList.remove('hidden');
                     visibleWrappers.push(wrapper);
@@ -97,19 +91,14 @@
                     wrapper.classList.add('hidden');
                 }
             });
-
-            // กำหนดใบแรกและใบสุดท้ายของหมวดนั้นๆ ให้มีระยะดันตรงกลาง
             if (visibleWrappers.length > 0) {
                 visibleWrappers[0].classList.add('first-visible');
                 visibleWrappers[visibleWrappers.length - 1].classList.add('last-visible');
             }
-
-            // เลื่อนกลับไปจุดเริ่มต้นเมื่อเปลี่ยนหมวดหมู่
             container.scrollTo({ left: 0, behavior: 'smooth' });
             setTimeout(updateCenterCard, 200);
         }
 
-        // กดปุ่มเพื่อเปลี่ยนหมวดหมู่
         filterBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 filterBtns.forEach(b => b.classList.remove('active'));
@@ -118,7 +107,6 @@
             });
         });
 
-        // จัดการเลื่อนเมาส์
         container.addEventListener('wheel', (e) => {
             if (e.deltaY !== 0) {
                 e.preventDefault();
@@ -126,15 +114,16 @@
             }
         });
 
-        // จัดการคลิกการ์ด
+        // จัดการคลิกการ์ด (ให้เลื่อนมากลางจอ)
         wrappers.forEach(wrapper => {
-            wrapper.addEventListener('click', () => {
-                wrapper.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+            wrapper.addEventListener('click', (e) => {
+                if(!e.target.classList.contains('flip-btn')) {
+                    wrapper.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+                }
             });
         });
 
-        // ตรวจสอบใบที่อยู่ตรงกลาง (นับเฉพาะใบที่แสดงผลอยู่)
-function updateCenterCard() {
+        function updateCenterCard() {
             const centerPoint = window.innerWidth / 2;
             let minDistance = Infinity;
             let centerWrapper = null;
@@ -150,7 +139,6 @@ function updateCenterCard() {
 
         container.addEventListener('scroll', updateCenterCard);
         window.addEventListener('resize', updateCenterCard);
-
         applyFilter('all');
     </script>
 </body>
