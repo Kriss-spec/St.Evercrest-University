@@ -22,39 +22,26 @@
     </div>
 
     <div class="showcase-container">
-        <!-- ใบที่ 1-11 -->
-<!-- ตัวอย่าง 11 ใบ -->
-        <div class="card-wrapper" data-category="common"><div class="card-inner"><div class="card-front"><img src="card1.jpg" onerror="this.src='argus_card.jpg';"></div><div class="card-back"><img src="card1_back.jpg"></div></div></div>
-        <div class="card-wrapper" data-category="common"><div class="card-inner"><div class="card-front"><img src="card2.jpg" onerror="this.src='argus_card.jpg';"></div><div class="card-back"><img src="card2_back.jpg"></div></div></div>
-        <div class="card-wrapper" data-category="rare"><div class="card-inner"><div class="card-front"><img src="card3.jpg" onerror="this.src='argus_card.jpg';"></div><div class="card-back"><img src="card3_back.jpg"></div></div></div>
-        <div class="card-wrapper" data-category="rare"><div class="card-inner"><div class="card-front"><img src="card4.jpg" onerror="this.src='argus_card.jpg';"></div><div class="card-back"><img src="card4_back.jpg"></div></div></div>
-        <div class="card-wrapper" data-category="rare"><div class="card-inner"><div class="card-front"><img src="card5.jpg" onerror="this.src='argus_card.jpg';"></div><div class="card-back"><img src="card5_back.jpg"></div></div></div>
-        <div class="card-wrapper" data-category="rare"><div class="card-inner"><div class="card-front"><img src="card6.jpg" onerror="this.src='argus_card.jpg';"></div><div class="card-back"><img src="card6_back.jpg"></div></div></div>
-        <div class="card-wrapper" data-category="epic"><div class="card-inner"><div class="card-front"><img src="card7.jpg" onerror="this.src='argus_card.jpg';"></div><div class="card-back"><img src="card7_back.jpg"></div></div></div>
-        <div class="card-wrapper" data-category="epic"><div class="card-inner"><div class="card-front"><img src="card8.jpg" onerror="this.src='argus_card.jpg';"></div><div class="card-back"><img src="card8_back.jpg"></div></div></div>
-        <div class="card-wrapper" data-category="epic"><div class="card-inner"><div class="card-front"><img src="card9.jpg" onerror="this.src='argus_card.jpg';"></div><div class="card-back"><img src="card9_back.jpg"></div></div></div>
-        <div class="card-wrapper" data-category="epic"><div class="card-inner"><div class="card-front"><img src="card10.jpg" onerror="this.src='argus_card.jpg';"></div><div class="card-back"><img src="card10_back.jpg"></div></div></div>
-        <div class="card-wrapper" data-category="legendary"><div class="card-inner"><div class="card-front"><img src="card11.jpg" onerror="this.src='argus_card.jpg';"></div><div class="card-back"><img src="card11_back.jpg"></div></div></div>
+        
+        <div class="card-wrapper" data-category="common"><div class="card" data-tilt data-tilt-glare data-tilt-max-glare="0.5"><img src="card1.jpg" alt="Card 1" onerror="this.onerror=null; this.src='argus_card.jpg';"></div></div>
+        <div class="card-wrapper" data-category="common"><div class="card" data-tilt data-tilt-glare data-tilt-max-glare="0.5"><img src="card2.jpg" alt="Card 2" onerror="this.onerror=null; this.src='argus_card.jpg';"></div></div>
+
+        <div class="card-wrapper" data-category="rare"><div class="card" data-tilt data-tilt-glare data-tilt-max-glare="0.5"><img src="card3.jpg" alt="Card 3" onerror="this.onerror=null; this.src='argus_card.jpg';"></div></div>
+        <div class="card-wrapper" data-category="rare"><div class="card" data-tilt data-tilt-glare data-tilt-max-glare="0.5"><img src="card4.jpg" alt="Card 4" onerror="this.onerror=null; this.src='argus_card.jpg';"></div></div>
+        <div class="card-wrapper" data-category="rare"><div class="card" data-tilt data-tilt-glare data-tilt-max-glare="0.5"><img src="card5.jpg" alt="Card 5" onerror="this.onerror=null; this.src='argus_card.jpg';"></div></div>
+        <div class="card-wrapper" data-category="rare"><div class="card" data-tilt data-tilt-glare data-tilt-max-glare="0.5"><img src="card6.jpg" alt="Card 6" onerror="this.onerror=null; this.src='argus_card.jpg';"></div></div>
+
+        <div class="card-wrapper" data-category="epic"><div class="card" data-tilt data-tilt-glare data-tilt-max-glare="0.5"><img src="card7.jpg" alt="Card 7" onerror="this.onerror=null; this.src='argus_card.jpg';"></div></div>        
+        <div class="card-wrapper" data-category="epic"><div class="card" data-tilt data-tilt-glare data-tilt-max-glare="0.5"><img src="card8.jpg" alt="Card 8" onerror="this.onerror=null; this.src='argus_card.jpg';"></div></div>
+        <div class="card-wrapper" data-category="epic"><div class="card" data-tilt data-tilt-glare data-tilt-max-glare="0.5"><img src="card9.jpg" alt="Card 9" onerror="this.onerror=null; this.src='argus_card.jpg';"></div></div>
+        <div class="card-wrapper" data-category="epic"><div class="card" data-tilt data-tilt-glare data-tilt-max-glare="0.5"><img src="card10.jpg" alt="Card 10" onerror="this.onerror=null; this.src='argus_card.jpg';"></div></div>
+        
+        <div class="card-wrapper" data-category="legendary"><div class="card" data-tilt data-tilt-glare data-tilt-max-glare="0.5"><img src="card11.jpg" alt="Card 11" onerror="this.onerror=null; this.src='argus_card.jpg';"></div></div>
     </div>
-
-    <!-- ใส่ CSS นี้เพิ่มใน style.css เพื่อให้คลิกผ่าน Tilt ได้ -->
-    <style>
-        .card-inner img { pointer-events: none; }
-    </style>
-
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
     <script>
-        // 1. Tilt
-        VanillaTilt.init(document.querySelectorAll(".card-inner"), {
-            max: 20, speed: 400, perspective: 1000
-        });
-
-        // 2. Flip
-        document.querySelectorAll('.card-inner').forEach(card => {
-            card.addEventListener('click', function() {
-                this.parentElement.classList.toggle('flipped');
-            });
-        });
+        VanillaTilt.init(document.querySelectorAll(".card"), { max: 20, speed: 400, perspective: 1000 });
         VanillaTilt.init(document.querySelector(".showcase-title"));
 
         const container = document.querySelector('.showcase-container');
