@@ -75,12 +75,20 @@ display: block;
 .card-wrapper.first-visible { margin-left: calc(50vw - 175px) !important; }
 .card-wrapper.last-visible { margin-right: calc(50vw - 175px) !important; }
 
-/* --- Mobile Responsive --- */
+/* --- ปรับแต่งหมวดหมู่บนมือถือ --- */
 @media screen and (max-width: 768px) {
-    .showcase-title { font-size: 1.1rem; }
-    .card-wrapper { width: 250px; height: 357px; }
-    .card-wrapper.first-visible { margin-left: calc(50vw - 125px) !important; }
-    .card-wrapper.last-visible { margin-right: calc(50vw - 125px) !important; }
+    .category-filters {
+        top: 10%;           /* ขยับลงมาอีกนิดไม่ให้ทับ title */
+        gap: 5px;          /* ลดช่องว่างระหว่างปุ่มให้แคบลง */
+        padding: 0 10px;    /* เพิ่ม padding ข้างๆ เผื่อกรณีปุ่มยาว */
+        flex-wrap: wrap;    /* ถ้าปุ่มเยอะเกินไป ให้มันขึ้นบรรทัดใหม่ได้ */
+        justify-content: center;
+    }
+
+    .filter-btn {
+        padding: 5px 12px;  /* ลดขนาดปุ่มลง */
+        font-size: 0.75rem; /* ลดขนาดฟอนต์ */
+    }
 }
 
 .music-btn {
