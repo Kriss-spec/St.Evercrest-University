@@ -46,8 +46,15 @@
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
     <script>
-        VanillaTilt.init(document.querySelectorAll(".card"), { max: 20, speed: 400, perspective: 1000 });
+        // 1. แก้ไขให้เรียก .card-inner แทน .card
+        VanillaTilt.init(document.querySelectorAll(".card-inner"), { max: 15, speed: 400, perspective: 1000 });
 
+        // 2. เพิ่มคำสั่งนี้เข้าไป เพื่อให้การ์ดพลิกได้เมื่อคลิก
+        document.querySelectorAll('.card-inner').forEach(card => {
+            card.addEventListener('click', function() {
+                this.parentElement.classList.toggle('flipped');
+            });
+        });
         // 2. Music Logic
         const music = document.getElementById("bgMusic");
         const musicBtn = document.getElementById("musicBtn");
