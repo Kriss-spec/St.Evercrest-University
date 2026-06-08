@@ -138,11 +138,19 @@
         // ปรับความดังเป็น 50%
         music.volume = 0.5;
 
-        document.body.addEventListener('click', () => {
-            if (music.paused) {
-                music.play().catch(e => console.log("รอการโต้ตอบจากผู้ใช้"));
-            }
-        }, { once: true });
+        // ฟังก์ชันเริ่มเล่น
+        function tryPlay() {
+            music.play().then(() => {
+                // ถ้าเล่นสำเร็จ ให้เอา Event Listener ออก
+                document.body.removeEventListener('click', tryPlay);
+                musicBtn.textContent = "🎵";
+            }).catch(e => {
+                console.log("รอการโต้ตอบจากผู้ใช้");
+            });
+        }
+
+        // เล่นทันทีที่ผู้ใช้คลิกตรงไหนก็ได้ของเว็บ
+        document.body.addEventListener('click', tryPlay, { once: true });
 
         musicBtn.addEventListener('click', () => {
             if (music.paused) {
