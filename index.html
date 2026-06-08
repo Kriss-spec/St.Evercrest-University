@@ -135,6 +135,8 @@
     <script>
         const music = document.getElementById("bgMusic");
         const musicBtn = document.getElementById("musicBtn");
+        // ปรับความดังเป็น 50%
+        music.volume = 0.5;
 
         document.body.addEventListener('click', () => {
             if (music.paused) {
