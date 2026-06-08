@@ -37,15 +37,19 @@
         <div class="card-wrapper" data-category="legendary"><div class="card-inner"><div class="card-front"><img src="card11.jpg" onerror="this.src='argus_card.jpg';"></div><div class="card-back"><img src="card11_back.jpg"></div></div></div>
     </div>
 
+    <!-- ใส่ CSS นี้เพิ่มใน style.css เพื่อให้คลิกผ่าน Tilt ได้ -->
+    <style>
+        .card-inner img { pointer-events: none; }
+    </style>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
     <script>
-        // 1. สั่ง Tilt ที่ตัว .card-inner
+        // 1. Tilt
         VanillaTilt.init(document.querySelectorAll(".card-inner"), {
-            max: 20,
-            speed: 400,
-            perspective: 1000
+            max: 20, speed: 400, perspective: 1000
         });
-        // 2. สั่ง Flip เมื่อคลิก (คลิกที่ตัว Inner ได้เลย)
+
+        // 2. Flip
         document.querySelectorAll('.card-inner').forEach(card => {
             card.addEventListener('click', function() {
                 this.parentElement.classList.toggle('flipped');
