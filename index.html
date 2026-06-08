@@ -38,11 +38,17 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
     <script>
-        // แก้ไขจากตัวเดิมที่เป็น .card ให้เป็น .card-inner ครับ
-        VanillaTilt.init(document.querySelectorAll(".card-inner"), { 
-            max: 20, 
-            speed: 400, 
-            perspective: 1000 
+        // 1. สั่ง Tilt ที่ตัว .card-inner
+        VanillaTilt.init(document.querySelectorAll(".card-inner"), {
+            max: 20,
+            speed: 400,
+            perspective: 1000
+        });
+        // 2. สั่ง Flip เมื่อคลิก (คลิกที่ตัว Inner ได้เลย)
+        document.querySelectorAll('.card-inner').forEach(card => {
+            card.addEventListener('click', function() {
+                this.parentElement.classList.toggle('flipped');
+            });
         });
         VanillaTilt.init(document.querySelector(".showcase-title"));
 
