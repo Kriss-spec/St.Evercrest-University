@@ -44,9 +44,10 @@
         <div class="card-wrapper" data-category="legendary"><div class="card-tilt" data-tilt data-tilt-glare data-tilt-max-glare="0.5"><div class="card-inner"><div class="card-front"><img src="legendary_card2.jpg" onerror="this.src='argus_card.jpg';"></div><div class="card-back"><img src="legendary_card2_back.jpg" onerror="this.src='argus_card.jpg';"></div></div></div><button class="flip-btn" onclick="flipCard(this)">FLIP</button></div>
     </div>
         <button id="musicBtn" class="music-btn">🎵</button>
-        <audio id="bgMusic" loop>
+        <audio id="bgMusic">
             <source src="music.mp3" type="audio/mpeg">
         </audio>
+        <button id="nextMusicBtn" class="music-btn" style="left: 80px;">⏭️</button>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
     <script>
@@ -134,35 +135,47 @@
         window.addEventListener('resize', updateCenterCard);
         
         // --- ส่วนที่เพิ่มใหม่: Flip Logic ---
-function flipCard(btn) {
-    const wrapper = btn.closest('.card-wrapper');
-    wrapper.classList.toggle('flipped');
-}
+        function flipCard(btn) {
+            const wrapper = btn.closest('.card-wrapper');
+            wrapper.classList.toggle('flipped');
+        }
 
-// --- ส่วนที่เพิ่มใหม่: Music Logic ---
-const music = document.getElementById("bgMusic");
-const musicBtn = document.getElementById("musicBtn");
-music.volume = 0.1;
+        // --- ส่วนที่เพิ่มใหม่: Music Logic ---
+        const music = document.getElementById("bgMusic");
+        const playlist = ["music.mp3", "music2.mp3", "music3.mp3", "music4.mp3", "music5.mp3", "music6.mp3"]; // ใส่ชื่อไฟล์เพลงที่สองที่นี่
+        const musicBtn = document.getElementById("musicBtn");
+        let currentTrack = 0; // เพลงที่เล่นอยู่ปัจจุบัน
+        music.volume = 0.1;
+        
+        function nextTrack() {
+            currentTrack = (currentTrack + 1) % playlist.length; // สลับ index วนลูป
+            music.src = playlist[currentTrack]; // เปลี่ยน source ไฟล์เพลง
+            music.play();
+        }
+        // ผูกฟังก์ชัน nextTrack ให้ทำงานอัตโนมัติเมื่อเพลงจบ
+            music.addEventListener('ended', nextTrack);
+        // ป้องกันปัญหา Auto-play block ของ Browser
+        function tryPlay() {
+            music.play().then(() => {
+                document.body.removeEventListener('click', tryPlay);
+            }).catch(e => console.log("รอการโต้ตอบ"));
+        }
+        document.body.addEventListener('click', tryPlay, { once: true });
 
-// ป้องกันปัญหา Auto-play block ของ Browser
-function tryPlay() {
-    music.play().then(() => {
-        document.body.removeEventListener('click', tryPlay);
-    }).catch(e => console.log("รอการโต้ตอบ"));
-}
-document.body.addEventListener('click', tryPlay, { once: true });
-
-musicBtn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    if (music.paused) { 
-        music.play(); 
-        musicBtn.textContent = "🎵"; 
-    } else { 
-        music.pause(); 
-        musicBtn.textContent = "🔇"; 
-    }
-});
-
+        musicBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (music.paused) { 
+                music.play(); 
+                musicBtn.textContent = "🎵"; 
+            } else { 
+                music.pause(); 
+                musicBtn.textContent = "🔇"; 
+            }
+        });
+        document.getElementById("nextMusicBtn").addEventListener('click', (e) => {
+            e.stopPropagation();
+            nextTrack();
+        });
         // รันครั้งแรกเมื่อเปิดเว็บ
         applyFilter('all');
     </script>
